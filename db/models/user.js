@@ -13,7 +13,8 @@ const userSchema = new Schema({
 	},
 	google: {
 		googleId: { type: String, required: false }
-	},
+  },
+  pages: [ { type: Schema.Types.ObjectId, ref: "Page" } ]
 	//photos: []
 	// local: {
 	// 	email: { type: String, unique: true },
