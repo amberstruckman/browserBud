@@ -13,7 +13,8 @@ const MongoStore = require('connect-mongo')(session)
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3010
+const apiRoutes = require('./routes');
 
 // ===== Middleware ====
 app.use(morgan('dev'))
@@ -76,6 +77,9 @@ if (process.env.NODE_ENV === 'production') {
 
 /* Express app ROUTING */
 app.use('/auth', require('./auth'))
+
+//API routes
+app.use('/', apiRoutes);
 
 // ====== Error handler ====
 app.use(function(err, req, res, next) {
