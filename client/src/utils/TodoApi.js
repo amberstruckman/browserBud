@@ -1,7 +1,7 @@
 import axios from "axios";
 import AxiosRequestConfig from "axios";
 
-const basePath = "/api/todo";
+const basePath = "http://localhost:3001/api/todo";
 
 export default {
     //gets saved TodoList
@@ -18,7 +18,7 @@ export default {
     updateTodo: function (todoItem) {
         return axios.put(`${basePath}/${todoItem.id}`, todoItem);
     },
-    removeTod: function (id) {
+    removeTodo: function (id) {
         return axios.delete(`${basePath}/${id}`);
     }
 }

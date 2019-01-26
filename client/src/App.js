@@ -138,7 +138,7 @@ class App extends Component {
 				{/* <LoginForm _login={this._login} /> */}
 				
 				<TodoList />
-				<TodoItems />
+				
 			
 				
 			</div>
