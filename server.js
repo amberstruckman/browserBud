@@ -13,7 +13,8 @@ const MongoStore = require('connect-mongo')(session)
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
+const apiRoutes = require('./routes');
 
 // ===== Middleware ====
 app.use(morgan('dev'))
@@ -22,7 +23,15 @@ app.use(
 		extended: false
 	})
 )
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+//allow cross origin to get around react need a special snowflake port
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
+});
+
 app.use(
 	session({
 		secret: process.env.APP_SECRET || 'this is the default passphrase',
@@ -78,8 +87,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/auth', require('./auth'))
 
 // routes
-const routes = require("./routes/routes.js");
-app.use(routes);
+//API routes
+ app.use('/', apiRoutes);
 
 // ====== Error handler ====
 app.use(function(err, req, res, next) {
