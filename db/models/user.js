@@ -5,8 +5,6 @@ mongoose.promise = Promise
 
 // Define userSchema
 const userSchema = new Schema({
-	//firstName: { type: String, unique: false },
-	//lastName: { type: String, unique: false },
 	local: {
 		email: { type: String, unique: true, required: true },
 		password: { type: String, unique: false, required: true }
@@ -14,19 +12,8 @@ const userSchema = new Schema({
 	google: {
 		googleId: { type: String, required: false }
   },
-  pages: [ { type: Schema.Types.ObjectId, ref: "Page" } ]
-	//photos: []
-	// local: {
-	// 	email: { type: String, unique: true },
-	// 	password: { type: String }
-	// },
-	// google: {
-	// 	id: { type: String },
-	// 	photos: []
-	// },
-	// firstName: { type: String },
-	// lastName: { type: String }
-})
+  browser: Schema.Types.Mixed
+});
 
 // Define schema methods
 userSchema.methods = {
@@ -47,9 +34,7 @@ userSchema.pre('save', function(next) {
 		this.local.password = this.hashPassword(this.local.password)
 		next()
 	}
-	// this.password = this.hashPassword(this.password)
-	// next()
-})
+});
 
 // Create reference to User & export
 const User = mongoose.model('User', userSchema)
