@@ -6,6 +6,7 @@ import LoginForm from './components/Login/LoginForm'
 import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
+import SaveButton from './components/SaveButton'
 import TodoItems from './components/TodoPanel/TodoItems'
 import TodoList from './components/TodoPanel/Todolist'
 
@@ -138,6 +139,8 @@ class App extends Component {
 				{/* <LoginForm _login={this._login} /> */}
 				
 				<TodoList />
+
+        <SaveButton user={this.state.user} />
 
 			</div>
 			

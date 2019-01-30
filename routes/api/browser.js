@@ -15,9 +15,8 @@ router.get("/browser", function(req, res) {
 router.put("/browser", function(req, res) {
   db.User.findOneAndUpdate(
     { _id: req.user._id },
-    { $set: req.body }
+    { $set: { browser: req.body.browser } }
   ).then(function() {
-    db.User.markModified("browser");
     res.status(200).end();
   }).catch(function(error) {
     res.status(422).json(error);
