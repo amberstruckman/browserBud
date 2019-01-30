@@ -12,7 +12,7 @@ const userSchema = new Schema({
 	google: {
 		googleId: { type: String, required: false }
   },
-  browser: Schema.Types.Mixed
+  browser: { type: Schema.Types.Mixed } 
 });
 
 // Define schema methods
