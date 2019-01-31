@@ -4,33 +4,37 @@ import BrowserApi from "../utils/BrowserApi";
 function saveData() {
   const browserObject = {
     browser: {
-      page: {
-        title: "Here's the title of the first page",
-        columns: [
-          {
-            linkPanel: {
-              title: "first linkPanel title",
-              links: [
+      pages: [
+        {
+          pageTitle: "Here's the title of the first page",
+          columns: [
+            {
+              panels: [
                 {
-                  linkTitle: "Google",
-                  linkUrl: "https://www.google.com"
+                  panelType: "linkPanel",
+                  panelTitle: "first linkPanel title",
+                  links: {
+                    linkTitle: "Google",
+                    linkUrl: "https://www.google.com"
+                  }
+                }
+              ]
+            },
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "second linkPanel title",
+                  links: {
+                    linkTitle: "UW",
+                    linkUrl: "https://www.washington.edu"
+                  }
                 }
               ]
             }
-          },
-          {
-            linkPanel: {
-              title: "second linkPanel title",
-              links: [
-                {
-                  linkTitle: "UW",
-                  linkUrl: "uw.edu"
-                }
-              ]
-            }
-          }
-        ]
-      }
+          ]
+        }
+      ]
     }
   };
   BrowserApi.putBrowser(browserObject);
@@ -39,10 +43,6 @@ function saveData() {
 const SaveButton = props => {
   return (
     <div className="SaveButton">
-      <p>Save data, user:</p>
-      <code>
-        {JSON.stringify(props)}
-      </code>
       <button onClick={function() { saveData() }}>Save data to /api/browser</button>
     </div>
   )

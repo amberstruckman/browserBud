@@ -1,5 +1,5 @@
 import axios from "axios";
-import AxiosRequestConfig from "axios";
+// import AxiosRequestConfig from "axios";
 
 const basePath = "http://localhost:3001/api/todo";
 

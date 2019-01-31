@@ -6,6 +6,7 @@ router.get("/browser", function(req, res) {
   db.User.findOne(
     { _id: req.user._id }
   ).then(function(dbResult) {
+    // console.log(dbResult.browser);
     res.json(dbResult.browser);
   }).catch(function(error) {
     res.status(422).json(error);
