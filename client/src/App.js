@@ -6,10 +6,11 @@ import LoginForm from './components/Login/LoginForm'
 import SignupForm from './components/SignupForm'
 import Header from './components/Header'
 import Home from './components/Home'
+import Page from "./components/Page";
 import SaveButton from './components/SaveButton'
-import TodoItems from './components/TodoPanel/TodoItems'
+// import TodoItems from './components/TodoPanel/TodoItems'
 import TodoList from './components/TodoPanel/Todolist'
-
+import BrowserApi from "./utils/BrowserApi";
 
 //var destination = document.querySelector("#container")
 
@@ -61,24 +62,27 @@ class App extends Component {
 		super()
 		this.state = {
 			loggedIn: false,
-			user: null
+      user: null,
+      browser: null
 		}
 		this._logout = this._logout.bind(this)
 		this._login = this._login.bind(this)
 	}
 	componentDidMount() {
 		axios.get('/auth/user').then(response => {
-			console.log(response.data)
+			// console.log(response.data)
 			if (!!response.data.user) {
-				console.log('THERE IS A USER')
+				// console.log('THERE IS A USER')
 				this.setState({
 					loggedIn: true,
-          user: response.data.user
+          user: response.data.user,
+          // browser: BrowserApi.getBrowser()
 				})
 			} else {
 				this.setState({
 					loggedIn: false,
-					user: null
+          user: null,
+          browser: null
 				})
 			}
 		})
@@ -86,13 +90,14 @@ class App extends Component {
 
 	_logout(event) {
 		event.preventDefault()
-		console.log('logging out')
+		// console.log('logging out')
 		axios.post('/auth/logout').then(response => {
-			console.log(response.data)
+			// console.log(response.data)
 			if (response.status === 200) {
 				this.setState({
 					loggedIn: false,
-					user: null
+          user: null,
+          browser: null
 				})
 			}
 		})
@@ -105,12 +110,13 @@ class App extends Component {
 				password
 			})
 			.then(response => {
-				console.log(response)
+				// console.log(response)
 				if (response.status === 200) {
 					// update the state
 					this.setState({
 						loggedIn: true,
-						user: response.data.user
+            user: response.data.user,
+            // browser: BrowserApi.getBrowser()
 					})
 				}
 			})
@@ -142,6 +148,20 @@ class App extends Component {
 
         <SaveButton user={this.state.user} />
 
+        {/* <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} /> */}
+        <br />
+        this.state.browser:<br />
+        <code>
+          {JSON.stringify(this.state.browser)}
+        </code><br /> <br />
+        this.state.user:<br />
+        <code>
+          {JSON.stringify(this.state.user)}
+        </code><br /> <br />
+        BrowserApi.getBrowser():<br />
+        <code>
+          {JSON.stringify(BrowserApi.getBrowser())}
+        </code><br /> <br />
 			</div>
 			
 				
