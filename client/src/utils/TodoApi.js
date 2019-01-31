@@ -1,7 +1,8 @@
 import axios from "axios";
 // import AxiosRequestConfig from "axios";
 
-const basePath = "http://localhost:3001/api/todo";
+//const basePath = "http://localhost:3001/api/todo";
+const basePath = "/api/todo";
 
 export default {
     //gets saved TodoList
