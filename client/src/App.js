@@ -119,9 +119,51 @@ class App extends Component {
           });
 				}
 			})
-	}
+	};
 
 	render() {
+    if (this.state.loggedIn) {
+      return (
+        <div className="App">
+          <h1>This is the main App component</h1>
+          <Header user={this.state.user} />
+          {/* LINKS to our different 'pages' */}
+          <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
+          {/*  ROUTES */}
+          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/" render={() => <Home user={this.state.user} />} />
+          <Route
+            exact
+            path="/login"
+            render={() =>
+              <LoginForm
+                _login={this._login}
+                _googleSignin={this._googleSignin}
+              />}
+          />
+          <Route exact path="/signup" component={SignupForm} />
+          {/* <LoginForm _login={this._login} /> */}
+          
+          <TodoList />
+
+          <SaveButton user={this.state.user} />
+
+          <br />
+          
+          <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} />
+
+          {/* <br />
+          this.state.browser:<br />
+          <code>
+            { JSON.stringify(this.state.browser) }
+          </code><br /> <br />
+          this.state.user:<br />
+          <code>
+            { JSON.stringify(this.state.user) }
+          </code><br /> <br /> */}
+        </div>
+    )
+  } else {
     return (
       <div className="App">
         <h1>This is the main App component</h1>
@@ -146,23 +188,24 @@ class App extends Component {
         <TodoList />
 
         <SaveButton user={this.state.user} />
-
-        {/* <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} /> */}
+        
         <br />
+        
+        {/* <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} /> */}
+
+        {/* <br />
         this.state.browser:<br />
         <code>
-          {JSON.stringify(this.state.browser)}
+          { JSON.stringify(this.state.browser) }
         </code><br /> <br />
         this.state.user:<br />
         <code>
-          {JSON.stringify(this.state.user)}
-        </code><br /> <br />
-        {/* pages:<br />
-        <code>
-          {JSON.stringify(pages)}
+          { JSON.stringify(this.state.user) }
         </code><br /> <br /> */}
       </div>
-    )
+  )
+  }
+
 
 	}
 }

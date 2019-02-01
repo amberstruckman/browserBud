@@ -13,10 +13,12 @@ function saveData() {
                 {
                   panelType: "linkPanel",
                   panelTitle: "first linkPanel title",
-                  links: {
-                    linkTitle: "Google",
-                    linkUrl: "https://www.google.com"
-                  }
+                  links: [
+                    {
+                      linkTitle: "Google",
+                      linkUrl: "https://www.google.com"
+                    }
+                  ]
                 }
               ]
             },
@@ -25,10 +27,46 @@ function saveData() {
                 {
                   panelType: "linkPanel",
                   panelTitle: "second linkPanel title",
-                  links: {
-                    linkTitle: "UW",
-                    linkUrl: "https://www.washington.edu"
-                  }
+                  links: [
+                    {
+                      linkTitle: "UW",
+                      linkUrl: "https://www.washington.edu"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "news sources",
+                  links: [
+                    {
+                      linkTitle: "The New York Times",
+                      linkUrl: "https://www.nytimes.com"
+                    },
+                    {
+                      linkTitle: "Washington Post",
+                      linkUrl: "https://www.washingtonpost.com"
+                    },
+                    {
+                      linkTitle: "National Public Radio",
+                      linkUrl: "https://www.npr.org"
+                    },
+                    {
+                      linkTitle: "CNN",
+                      linkUrl: "https://www.cnn.com"
+                    },
+                    {
+                      linkTitle: "Seattle Times",
+                      linkUrl: "https://www.seattletimes.com"
+                    },
+                    {
+                      linkTitle: "Politico",
+                      linkUrl: "https://www.politico.com"
+                    }
+                  ]
                 }
               ]
             }
