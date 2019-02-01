@@ -7,12 +7,12 @@ import Column from "./Column";
 const Page = props => {
   let { pageTitle, columns } = props;
   return (
-    <table className="page">
+    <table className="page"><tr>
       <div className="pageTitle">{pageTitle}</div>
       <div>{ columns.map((obj, index) =>
         <Column panels={obj.panels} key={index} />
       )}</div>
-    </table>
+    </tr></table>
   );
 }
 

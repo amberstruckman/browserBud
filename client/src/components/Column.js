@@ -7,9 +7,9 @@ import Panel from "./Panel";
 const Column = props => {
   let { panels } = props;
   return (
-    <tr><td className="column">{ panels.map((obj, index) =>
+    <td className="column">{ panels.map((obj, index) =>
       <Panel panelType={obj.panelType} panelTitle={obj.panelTitle} links={obj.links} key={index} />
-    )}</td></tr>
+    )}</td>
   );
 }
 
