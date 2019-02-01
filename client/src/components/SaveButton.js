@@ -13,10 +13,12 @@ function saveData() {
                 {
                   panelType: "linkPanel",
                   panelTitle: "first linkPanel title",
-                  links: {
-                    linkTitle: "Google",
-                    linkUrl: "https://www.google.com"
-                  }
+                  links: [
+                    {
+                      linkTitle: "Google",
+                      linkUrl: "https://www.google.com"
+                    }
+                  ]
                 }
               ]
             },
@@ -25,10 +27,12 @@ function saveData() {
                 {
                   panelType: "linkPanel",
                   panelTitle: "second linkPanel title",
-                  links: {
-                    linkTitle: "UW",
-                    linkUrl: "https://www.washington.edu"
-                  }
+                  links: [
+                    {
+                      linkTitle: "UW",
+                      linkUrl: "https://www.washington.edu"
+                    }
+                  ]
                 }
               ]
             }

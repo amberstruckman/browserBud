@@ -6,12 +6,13 @@ import Link from "./Link";
 
 const Panel = props => {
   let { panelType, panelTitle, links } = props;
+  console.log(links);
   if (panelType === "linkPanel") {
     return (
       <div className="panel">
         <div className="panelTitle">{panelTitle}</div>
         <div>{ links.map((obj, index) =>
-          <Link linkUrl={obj.linkUrl} linkTitle={obj.linkTitle} />
+          <Link linkUrl={obj.linkUrl} linkTitle={obj.linkTitle} key={index} />
         )}</div>
       </div>
     );

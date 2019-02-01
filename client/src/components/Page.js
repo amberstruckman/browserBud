@@ -10,7 +10,7 @@ const Page = props => {
     <div className="page">
       <div className="pageTitle">{pageTitle}</div>
       <div>{ columns.map((obj, index) =>
-        <Column panels={obj.panels} />
+        <Column panels={obj.panels} key={index} />
       )}</div>
     </div>
   );

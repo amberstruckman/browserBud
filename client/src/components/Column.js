@@ -8,7 +8,7 @@ const Column = props => {
   let { panels } = props;
   return (
     <div>{ panels.map((obj, index) =>
-      <Panel panelType={obj.panelType} panelTitle={obj.panelTitle} links={obj.links} />
+      <Panel panelType={obj.panelType} panelTitle={obj.panelTitle} links={obj.links} key={index} />
     )}</div>
   );
 }
