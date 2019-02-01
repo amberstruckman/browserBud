@@ -10,7 +10,6 @@ import Page from "./components/Page";
 import SaveButton from './components/SaveButton'
 // import TodoItems from './components/TodoPanel/TodoItems'
 import TodoList from './components/TodoPanel/Todolist'
-import BrowserApi from "./utils/BrowserApi";
 
 //var destination = document.querySelector("#container")
 
@@ -70,13 +69,13 @@ class App extends Component {
 	}
 	componentDidMount() {
 		axios.get('/auth/user').then(response => {
-			// console.log(response.data)
+			console.log(response.data);
 			if (!!response.data.user) {
 				// console.log('THERE IS A USER')
 				this.setState({
 					loggedIn: true,
           user: response.data.user,
-          // browser: BrowserApi.getBrowser()
+          browser: response.data.browser
 				})
 			} else {
 				this.setState({
@@ -112,39 +111,39 @@ class App extends Component {
 			.then(response => {
 				// console.log(response)
 				if (response.status === 200) {
-					// update the state
-					this.setState({
-						loggedIn: true,
+          // update the state
+          this.setState({
+            loggedIn: true,
             user: response.data.user,
-            // browser: BrowserApi.getBrowser()
-					})
+            browser: response.data.browser
+          });
 				}
 			})
 	}
 
 	render() {
-		return (
-			<div className="App">
-				<h1>This is the main App component</h1>
-				<Header user={this.state.user} />
-				{/* LINKS to our different 'pages' */}
-				<DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
-				{/*  ROUTES */}
-				{/* <Route exact path="/" component={Home} /> */}
-				<Route exact path="/" render={() => <Home user={this.state.user} />} />
-				<Route
-					exact
-					path="/login"
-					render={() =>
-						<LoginForm
-							_login={this._login}
-							_googleSignin={this._googleSignin}
-						/>}
-				/>
-				<Route exact path="/signup" component={SignupForm} />
-				{/* <LoginForm _login={this._login} /> */}
-				
-				<TodoList />
+    return (
+      <div className="App">
+        <h1>This is the main App component</h1>
+        <Header user={this.state.user} />
+        {/* LINKS to our different 'pages' */}
+        <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
+        {/*  ROUTES */}
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" render={() => <Home user={this.state.user} />} />
+        <Route
+          exact
+          path="/login"
+          render={() =>
+            <LoginForm
+              _login={this._login}
+              _googleSignin={this._googleSignin}
+            />}
+        />
+        <Route exact path="/signup" component={SignupForm} />
+        {/* <LoginForm _login={this._login} /> */}
+        
+        <TodoList />
 
         <SaveButton user={this.state.user} />
 
@@ -158,16 +157,13 @@ class App extends Component {
         <code>
           {JSON.stringify(this.state.user)}
         </code><br /> <br />
-        BrowserApi.getBrowser():<br />
+        {/* pages:<br />
         <code>
-          {JSON.stringify(BrowserApi.getBrowser())}
-        </code><br /> <br />
-			</div>
-			
-				
-				//,destination
-			
-		)
+          {JSON.stringify(pages)}
+        </code><br /> <br /> */}
+      </div>
+    )
+
 	}
 }
 

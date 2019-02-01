@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../db/models/user')
 const passport = require('../passport')
+const db = require("../db/models");
 
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
@@ -13,33 +14,35 @@ router.get('/google/callback',
 )
 
 // this route is just used to get the user basic info
-router.get('/user', (req, res, next) => {
-	// console.log('===== user!!======')
-	// console.log(req.user)
+router.get("/user", (req, res, next) => {
 	if (req.user) {
-		return res.json({ user: req.user })
+    db.User.findOne(
+      { _id: req.user._id }
+    ).then(function(dbResult) {
+      return res.json({ user: req.user, browser: dbResult.browser });
+    }).catch(function(error) {
+      res.status(422).json(error);
+    });
 	} else {
-		return res.json({ user: null })
+		return res.json({ user: null, browser: null })
 	}
-})
+});
 
 router.post(
 	'/login',
 	function(req, res, next) {
-		// console.log(req.body)
-		// console.log('================')
 		next()
 	},
 	passport.authenticate('local'),
 	(req, res) => {
-		// console.log('POST to /login')
-		const user = JSON.parse(JSON.stringify(req.user)) // hack
-		const cleanUser = Object.assign({}, user)
+    const user = JSON.parse(JSON.stringify(req.user)) // hack
+    const browser = JSON.parse(JSON.stringify(req.user.browser));
+    const cleanUser = Object.assign({}, user);
+    const cleanBrowser = Object.assign({}, browser);
 		if (cleanUser.local) {
-			// console.log(`Deleting ${cleanUser.local.password}`)
 			delete cleanUser.local.password
 		}
-		res.json({ user: cleanUser })
+		res.json({ user: cleanUser, browser: cleanBrowser })
 	}
 )
 
