@@ -125,7 +125,7 @@ class App extends Component {
     if (this.state.loggedIn) {
       return (
         <div className="App">
-          <h1>This is the main App component</h1>
+          <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           {/* LINKS to our different 'pages' */}
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
@@ -149,7 +149,9 @@ class App extends Component {
           <SaveButton user={this.state.user} />
 
           <br />
-          
+
+          <hr />
+
           <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} />
 
           {/* <br />
@@ -166,7 +168,7 @@ class App extends Component {
   } else {
     return (
       <div className="App">
-        <h1>This is the main App component</h1>
+        <h1>BrowserBud!</h1>
         <Header user={this.state.user} />
         {/* LINKS to our different 'pages' */}
         <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
@@ -184,10 +186,6 @@ class App extends Component {
         />
         <Route exact path="/signup" component={SignupForm} />
         {/* <LoginForm _login={this._login} /> */}
-        
-        <TodoList />
-
-        <SaveButton user={this.state.user} />
         
         <br />
         

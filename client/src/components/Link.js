@@ -5,7 +5,7 @@ import React from "react";
 const Link = props => {
   return (
     <div className="Link">
-      <p><a href={props.linkUrl}>{props.linkTitle}</a></p>
+      <a href={props.linkUrl}>{props.linkTitle}</a>
     </div>
   )
 }
