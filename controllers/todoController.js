@@ -1,5 +1,15 @@
 const db = require("../db/models");
 
+const convertForAlexa = (todo) => {
+  console.log(JSON.stringify(todo));
+  return {
+    "uid": todo["_id"],
+    "updateDate": "2019-01-31T00:00:00.0Z",
+    "titleText": todo.item,
+    "mainText": todo.item,
+    "redirectionUrl": "https://thawing-plains-98515.herokuapp.com/"
+  };
+};
 // Defining methods for the todolist
 module.exports = {
   findAll: function(req, res) {
@@ -27,5 +37,11 @@ module.exports = {
       .then(dbTodoItem => dbTodoItem.remove())
       .then(dbTodoItem => res.json(dbTodoItem))
       .catch(err => res.status(422).json(err));
+  },
+  alexa: function(req, res) {
+    db.TodoItem.find(req.query)
+      .then(todos => todos.map(convertForAlexa))
+      .then(alexaItem => res.json(alexaItem))
+      .catch(err => res.status(500).json(err));
   }
 };

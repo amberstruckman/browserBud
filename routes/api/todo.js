@@ -2,6 +2,9 @@ const router = require("express").Router();
 const todoController = require("../../controllers/todoController");
 
 // Matches with "/api/todo"
+router.route("/alexa")
+  .get(todoController.alexa);
+
 router.route("/")
   .get(todoController.findAll)
   .post(todoController.create);
@@ -12,5 +15,6 @@ router
   .get(todoController.findById)
   .put(todoController.update)
   .delete(todoController.remove);
+
 
 module.exports = router;
