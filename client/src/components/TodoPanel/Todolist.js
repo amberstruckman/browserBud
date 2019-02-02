@@ -8,6 +8,8 @@ class TodoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            panelType : "todoPanel",
+            panelTitle : "todo",
             items: [],
             initialMove: false
           };
@@ -24,7 +26,14 @@ class TodoList extends Component {
         }
         createNew(){
           console.log('x: ', this.state.initialMove);
-          this.setState({initialMove: true}, () => this.state.initialMove ? console.log("SUCCESS") : console.log("NOT SUCCESS"))
+
+          // this.setState({initialMove: true}, () => this.state.initialMove ? 
+          console.log(this.state)
+          this.props.browser.pages[0].columns[0].panels.push(this.state)
+          console.log(this.props.browser)
+          BrowserApi.putBrowser(this.props.browser)
+          // // this.setState() +
+          // this.props.browser.pages[0].columns.push(this.state.panels) + console.log(this.props.browser.pages[0].columns) : console.log("NOT SUCCESS"))
           
         }
       

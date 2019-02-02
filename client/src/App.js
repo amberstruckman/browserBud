@@ -144,7 +144,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignupForm} />
           {/* <LoginForm _login={this._login} /> */}
           
-          <TodoList />
+          <TodoList browser={this.state.browser}/>
 
           <SaveButton user={this.state.user} />
 
@@ -152,7 +152,7 @@ class App extends Component {
 
           <hr />
 
-          <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} />
+          {/* <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} /> */}
 
           {/* <br />
           this.state.browser:<br />
