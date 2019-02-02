@@ -6,31 +6,43 @@ function saveData() {
     browser: {
       pages: [
         {
-          pageTitle: "Here's the title of the first page",
+          pageTitle: "Here's page one of my super awesome links.",
           columns: [
             {
               panels: [
                 {
                   panelType: "linkPanel",
-                  panelTitle: "first linkPanel title",
+                  panelTitle: "web tools",
                   links: [
                     {
                       linkTitle: "Google",
                       linkUrl: "https://www.google.com"
+                    },
+                    {
+                      linkTitle: "Wikipedia",
+                      linkUrl: "https://www.wikipedia.com"
                     }
                   ]
-                }
-              ]
-            },
-            {
-              panels: [
+                },
                 {
                   panelType: "linkPanel",
-                  panelTitle: "second linkPanel title",
+                  panelTitle: "social media",
                   links: [
                     {
-                      linkTitle: "UW",
-                      linkUrl: "https://www.washington.edu"
+                      linkTitle: "Facebook",
+                      linkUrl: "https://www.facebook.com"
+                    },
+                    {
+                      linkTitle: "Instagram",
+                      linkUrl: "https://www.instagram.com"
+                    },
+                    {
+                      linkTitle: "LinkedIn",
+                      linkUrl: "https://www.linkedin.com"
+                    },
+                    {
+                      linkTitle: "Reddit",
+                      linkUrl: "https://www.reddit.com"
                     }
                   ]
                 }
@@ -65,6 +77,28 @@ function saveData() {
                     {
                       linkTitle: "Politico",
                       linkUrl: "https://www.politico.com"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "fun stuff",
+                  links: [
+                    {
+                      linkTitle: "Internet Movie Database",
+                      linkUrl: "https://www.imdb.com"
+                    },
+                    {
+                      linkTitle: "All Music Guide",
+                      linkUrl: "https://www.allmusic.com"
+                    },
+                    {
+                      linkTitle: "Airbnb",
+                      linkUrl: "https://www.airbnb.com"
                     }
                   ]
                 }
