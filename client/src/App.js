@@ -12,7 +12,7 @@ import SaveButton from './components/SaveButton'
 import TodoList from './components/TodoPanel/Todolist'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
-import Calendar from './components/Calendar/Calendar';
+import DayCalendar from './components/Calendar/DayCalendar';
 
 //var destination = document.querySelector("#container")
 
@@ -148,7 +148,7 @@ class App extends Component {
           {/* <LoginForm _login={this._login} /> */}
           
           <TodoList browser={this.state.browser}/>
-					<Calendar />
+					<DayCalendar />
 
           <SaveButton user={this.state.user} />
 

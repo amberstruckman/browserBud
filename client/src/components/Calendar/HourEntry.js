@@ -3,13 +3,21 @@ import React, { Component } from "react";
 
 class HourPlanner extends Component {
     render() {
-        return (
-            <tr>
-                <td>{this.props.hourEntry.displayHour}</td>
-                <td>{this.props.hourEntry.events[0].title}</td>
-            </tr>
-        );       
+      var timeClass = "";
+      if (this.props.current) {
+        timeClass = "current";
+      }
+      if (this.props.past) {
+        timeClass="past";
+      }
+      
+      return (
+        <tr className={timeClass}>
+          <td>{this.props.displayHour}</td>
+          <td>{this.props.events[0].title}</td>
+        </tr>
+      );
     }
-}
-
-export default HourPlanner;
+  }
+  
+  export default HourPlanner;
