@@ -24,14 +24,22 @@ class TodoList extends Component {
         componentDidMount(){
           TodoApi.getTodoList().then(this.addReponseToState);
         }
+
         createNew(){
           console.log('x: ', this.state.initialMove);
 
-          // this.setState({initialMove: true}, () => this.state.initialMove ? 
-          console.log(this.state)
-          this.props.browser.pages[0].columns[0].panels.push(this.state)
-          console.log(this.props.browser)
-          BrowserApi.putBrowser(this.props.browser)
+          this.setState({initialMove: true}, () => this.state.initialMove ? 
+          console.log("THIS IS this.STATE", this.state) +
+          this.props.browser.pages[0].columns[0].panels.push(this.state) +
+          console.log("THIS IS THIS.props.browser", this.props.browser) +
+          BrowserApi.putBrowser(this.props.browser) +
+          this.setState({
+              items: [],
+              initialMove: false
+          }) :
+          console.log("Not Success")
+
+          )
           // // this.setState() +
           // this.props.browser.pages[0].columns.push(this.state.panels) + console.log(this.props.browser.pages[0].columns) : console.log("NOT SUCCESS"))
           

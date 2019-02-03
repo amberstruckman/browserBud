@@ -10,6 +10,8 @@ import Page from "./components/Page";
 import SaveButton from './components/SaveButton'
 // import TodoItems from './components/TodoPanel/TodoItems'
 import TodoList from './components/TodoPanel/Todolist'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 //var destination = document.querySelector("#container")
 
@@ -152,7 +154,7 @@ class App extends Component {
 
           <hr />
 
-          {/* <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} /> */}
+          <Page pageTitle={this.state.browser.pages[0].pageTitle} columns={this.state.browser.pages[0].columns} />
 
           {/* <br />
           this.state.browser:<br />
@@ -208,4 +210,4 @@ class App extends Component {
 	}
 }
 
-export default App
+export default DragDropContext(HTML5Backend)(App)
