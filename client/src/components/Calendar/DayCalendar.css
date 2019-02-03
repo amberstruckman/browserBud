@@ -1,0 +1,27 @@
+table.day-calendar {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+.day-calendar td, .day-calendar th {
+  border: 1px solid black;
+  padding: 0.25em;
+}
+.day-calendar tr.current {
+  background-color: rgba(0, 128, 255, 0.25);
+}
+
+.day-calendar tr.current + tr {
+  background-color: rgba(0, 255, 128, 0.25);
+}
+.day-calendar tr.current + tr + tr {
+  background-color: rgba(0, 255, 128, 0.125);
+}
+.day-calendar tr.current + tr + tr + tr {
+  background-color: rgba(0, 255, 128, 0.0625);
+}
+.day-calendar tr.past {
+  color: #555;
+  background-color: #ddd;
+  font-style: italic;
+}

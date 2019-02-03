@@ -10,6 +10,9 @@ import Page from "./components/Page";
 import SaveButton from './components/SaveButton'
 // import TodoItems from './components/TodoPanel/TodoItems'
 import TodoList from './components/TodoPanel/Todolist'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
+import DayCalendar from './components/Calendar/DayCalendar';
 
 class App extends Component {
 	constructor() {
@@ -91,6 +94,8 @@ class App extends Component {
           />
           <Route exact path="/signup" component={SignupForm} />
           <TodoList browser={this.state.browser}/>
+					<DayCalendar />
+
           <SaveButton user={this.state.user} />
           <br /> <hr />
           <Page browser={this.state.browser} selectedPage={this.state.selectedPage} />
@@ -119,4 +124,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App)
