@@ -1,15 +1,25 @@
 import React from "react";
 import Panel from "./Panel";
 
-// props.panels is an array of objects, each containing panels
-// iterate through props.panels using array.map() and return a panel component for each index
+// function addLinkPanel(column) {
+//   console.log(column);
+//   const newPanel = {
+//     panelType: "linkPanel",
+//     panelTitle: "new linkPanel",
+//     links: []
+//   }
+// }
 
 const Column = props => {
-  let { panels } = props;
+  const { browser, selectedPage, id } = props;
+  const { panels } = browser.pages[selectedPage].columns[id];
   return (
     <td className="column">{ panels.map((obj, index) =>
-      <Panel panelType={obj.panelType} panelTitle={obj.panelTitle} links={obj.links} key={index} />
-    )}</td>
+      <Panel browser={browser} selectedPage={selectedPage} key={index} id={index} thisColumn={id} />
+    ) }
+    {/* <button onClick={ function() { addLinkPanel(props.id) } }>add linkPanel</button> */}
+    {/* <button onClick={ props.handleAddLinkPanel(props.id) }>add linkPanel</button> */}
+    </td>
   );
 }
 
