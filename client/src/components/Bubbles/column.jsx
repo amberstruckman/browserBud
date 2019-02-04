@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Bubbles.css"
-import { Droppable } from "react-beautiful-dnd"
+import { Droppable, Draggable } from "react-beautiful-dnd"
 import Task from './task'
 import styled from 'styled-components'
 
@@ -9,7 +9,10 @@ width: 300px;
 background-color: paleturquoise;
 margin: 8px;
 border: 1px solid lightgrey;
-border-radius: 2px
+border-radius: 2px;
+
+display: flex;
+flex-direction: column;
 `
 
 const Title = styled.h3`
@@ -19,7 +22,9 @@ padding:8px;
 const TaskList = styled.div`
 padding: 8px;
 transition: background-color 0.2s ease;
-background-color: ${props => (props.isDraggingOver ? 'white':'paleturquoise')}
+background-color: ${props => (props.isDraggingOver ? 'white':'paleturquoise')};
+flex-grow: 1;
+min-height:100px;
 `
 
 
@@ -28,11 +33,18 @@ export default class Column extends React.Component {
     render() {
 
         return (
-            <Container>
+            <Draggable
+            draggableId={this.props.column.id}
+            //position of droppable contents?
+            index={this.props.index}>
+            {(provided)=> (
+            <Container
+            {...provided.draggableProps}
+            ref={provided.innerRef}>
 
           
-                    <Title>{this.props.column.title}</Title>
-                    <Droppable droppableId={this.props.column.id}>
+                    <Title {...provided.dragHandleProps}>{this.props.column.title}</Title>
+                    <Droppable droppableId={this.props.column.id} type="task">
 
                         {(provided, snapshot) => (
                             <TaskList 
@@ -48,6 +60,9 @@ export default class Column extends React.Component {
                         )}
                     </Droppable>
                     </Container>
+
+)}
+                    </Draggable>
         )
     }
 }

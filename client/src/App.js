@@ -84,7 +84,7 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} />
+          {/* <Page browser={this.state.browser} selectedPage={this.state.selectedPage} /> */}
           <SaveButton user={this.state.user} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
