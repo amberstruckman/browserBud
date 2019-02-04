@@ -13,12 +13,8 @@ import TodoList from "./components/TodoPanel/Todolist";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import DayCalendar from "./components/Calendar/DayCalendar";
-<<<<<<< HEAD
-import Bubbles from "./components/Bubbles/Bubble"
-=======
 import Bubbles from "./components/Bubbles/Bubble";
 
->>>>>>> f4b6bbbda4967395fed96f247280d33e466e21d1
 class App extends React.Component {
 	constructor() {
 		super();
