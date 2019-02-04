@@ -77,7 +77,7 @@ class DayCalendar extends Component {
       let changeType = e.target.value;
       console.log(changeType);
      
-      let selectedMoment = this.state.days[this.state.selectedDayKey].moment;
+      let selectedMoment = moment(this.state.days[this.state.selectedDayKey].moment.toDate());
 
       switch (changeType) {
           case nextDayKey:
