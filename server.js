@@ -1,12 +1,8 @@
 // Loading evnironmental variables here
-if (process.env.NODE_ENV !== 'production') {
-	console.log('loading dev environments')
-	require('dotenv').config()
-}
-require('dotenv').config()
+require('dotenv').config();
 
 const express = require('express')
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
@@ -17,20 +13,9 @@ const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes');
 
 // ===== Middleware ====
-app.use(morgan('dev'))
-app.use(
-	bodyParser.urlencoded({
-		extended: false
-	})
-)
-app.use(bodyParser.json());
-//allow cross origin to get around react need a special snowflake port
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    next();
-});
+app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(
 	session({
@@ -99,5 +84,5 @@ app.use(function(err, req, res, next) {
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
-	console.log(`App listening on PORT: ${PORT}`)
+	console.log(`App listening on PORT ${PORT}`)
 })
