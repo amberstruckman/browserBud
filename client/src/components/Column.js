@@ -14,11 +14,11 @@ const Column = props => {
   }
 
   return (
-    <td className="column">{ panels.map((obj, index) =>
+    <div className="column">{ panels.map((obj, index) =>
       <Panel browser={browser} selectedPage={selectedPage} key={index} id={index} thisColumn={id} />
     ) }
     <button onClick={ function() { handleClick() } }>add linkPanel</button>
-    </td>
+    </div>
   );
 
 }

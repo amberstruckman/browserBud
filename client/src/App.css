@@ -37,3 +37,8 @@
 .pageTitle, .panelTitle {
   font-weight: bold;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}

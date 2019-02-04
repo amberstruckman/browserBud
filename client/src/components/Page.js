@@ -5,12 +5,12 @@ const Page = props => {
   const { browser, selectedPage } = props;
   const { pageTitle, columns } = browser.pages[selectedPage];
   return (
-    <table className="page"><tr>
+    <div className="page">
       <div className="pageTitle">{pageTitle}</div>
-      <div>{ columns.map((obj, index) =>
+      <div className="flex-container">{ columns.map((obj, index) =>
         <Column browser={browser} selectedPage={selectedPage} key={index} id={index} />
       )}</div>
-    </tr></table>
+    </div>
   );
 }
 
