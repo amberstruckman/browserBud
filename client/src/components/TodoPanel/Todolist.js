@@ -27,6 +27,7 @@ class TodoList extends Component {
 
         createNew(){
           console.log('x: ', this.state.initialMove);
+          console.log("xxxx", BrowserApi.getBrowser())
 
           this.setState({initialMove: true}, () => this.state.initialMove ? 
           console.log("THIS IS this.STATE", this.state) +
@@ -40,6 +41,10 @@ class TodoList extends Component {
           console.log("Not Success")
 
           )
+
+          BrowserApi.getBrowser().then(function (resolve){
+            console.log(resolve.data)
+          })
           // // this.setState() +
           // this.props.browser.pages[0].columns.push(this.state.panels) + console.log(this.props.browser.pages[0].columns) : console.log("NOT SUCCESS"))
           
@@ -85,6 +90,8 @@ class TodoList extends Component {
           }
     
   render() {
+
+  
     return (
       <div className="todoListMain">
         <div className="header">
