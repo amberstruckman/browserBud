@@ -1,0 +1,16 @@
+#bubbles{
+    width: 300px;
+    height: auto;
+    background: paleturquoise;
+    border-radius: 5px;
+
+}
+
+#tasks{
+    width: auto;
+    padding: 8px;
+    border-radius: 3px;
+    background: paleturquoise;
+    border: 1px solid white;
+    margin-bottom: 8px;
+}
