@@ -3,159 +3,30 @@ import moment from "moment";
 import DayPlanner from "./DayPlanner";
 import "./DayCalendar.css";
 
-// class Calendar extends Component {
-
-//     constructor(props) {
-//         super(props);
-    
-//         this.createDayView = this.createTasks.bind(this);
-//       }
-//     }
-  
-//     createEvent (title ) {
-//       return {
-//           "title": title 
-//           //duration
-//           //start
-//           //end
-//         };
-//     }
-
-//     createHourEntry (hour, currentHour, ...events) {
-//         return {
-//             "hour": hour, //numeric hour
-//             "displayHour": hour.toString(), //might be useful separate the way you want to display hour from the numeric hour
-//             "current": hour === currentHour,
-//             "events": events
-//         };
-//     }
-
-//     createDayView(currentHour) {//would this work better as a 12-hour hour or a 24-hour hour?
-//         //given the current hour, build an array of hours to display
-//         //Version 1: the array should contain an hour entry for each hour of the day
-        
-//         let hourEntries = [];
-
-//         for (let index = 1; index <= 24; index++) {
-//             let event = this.createEvent("EventTitle"+ index);
-//             let hourEntry= this.createHourEntry(index, currentHour, event);
-//             hourEntries.push(hourEntry);           
-//         }
-        
-//         let currentDay = moment().format('dddd, MMMM Do YYYY');
-//         let dayViewObj = {
-//             "currentHour": currentHour,
-//             "hourEntries": hourEntries,
-//             "currentDay": currentDay
-//         };
-
-//         return dayViewObj;
-//     };
-// export default Calendar;
-
-// class CalendarA extends React.Component { 
-  
-//     render() {
-  
-//       var dayViewObj = {
-//               "currentHour": 12,
-//               "hourEntries": [
-//                 {
-//                   "hour": 13, //numeric hour
-//                   "displayHour": "1:00 PM", //might be useful separate the way you want to display hour from the numeric hour
-//                   "current": false,
-//                   "events": [
-//                     {
-//                       title: "1 o'clock stuff"
-//                     }
-//                   ]
-//                 }
-//               ],
-//               "currentDay": "Feb 2, 2019"
-//           };
-      
-//       return (
-//           <div>
-//               Calendar {dayViewObj.currentDay}
-//             <table>
-//               <thead>
-//                 <tr>
-//                   <th colSpan="2">{dayViewObj.currentDay}</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 <tr>
-//                     <td>{dayViewObj.hourEntries[0].displayHour}</td>
-//                     <td>{dayViewObj.hourEntries[0].events}</td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-       
-//       );
-//     }
-//   }
-   
-  
-//   function createEvent (title ) {
-//         return {
-//             "title": title 
-//             //duration
-//             //start
-//             //end
-//           };
-//       }
-  
-//   function createHourEntry (hour, currentHour, ...events) {
-//           return {
-//               "hour": hour, //numeric hour
-//               "displayHour": hour.toString(), //might be useful separate the way you want to display hour from the numeric hour
-//               "current": hour === currentHour,
-//               "past": hour < currentHour,
-//               "events": events
-//           };
-//       }
-  
-//    function createDayView(currentHour) {//would this work better as a 12-hour hour or a 24-hour hour?
-//           //given the current hour, build an array of hours to display
-//           //Version 1: the array should contain an hour entry for each hour of the day
-          
-//           var hourEntries = [];
-  
-//           for (let index = 1; index <= 24; index++) {
-//               var event = this.createEvent("EventTitle"+ index);
-//               var hourEntry= this.createHourEntry(index, currentHour, event);
-//               hourEntries.push(hourEntry);           
-//           }
-          
-//           let currentDay = "Saturday, February 2, 2019"//moment().format('dddd, MMMM Do YYYY');
-//           let dayViewObj = {
-//               "currentHour": currentHour,
-//               "hourEntries": hourEntries,
-//               "currentDay": currentDay
-//           };
-  
-//           return dayViewObj;
-  
-//           //Version 2: the function should take in a number for future hours to generate and a number for past hours to generate and generate those hours instead of the whole day
-//       }
-
-//       export default CalendarA;
+const previousDayKey = "prev-day";
+const nextDayKey = "next-day";
+const nextMonthKey = "next-month";
+const prevMonthKey = "prev-month";
+const todayKey = "today";
+const dayKeyFormat = "YYYY-MM-DD";
 
 class DayCalendar extends Component { 
   constructor(props) {
     super(props);
 
     const thisIsTheMoment = moment();
-    const dayKey = thisIsTheMoment.format("YYYY-MM-DD");
+    const dayKey = thisIsTheMoment.format(dayKeyFormat);
     const days = {};
     days[dayKey] = this.createDay(thisIsTheMoment);
     this.state = {
+      now: thisIsTheMoment,
       days: days,
-      todayOffset: 0,
+      todayKey: dayKey,
       selectedDayKey: dayKey
     };
-    
+
+    this.changeDay = this.changeDay.bind(this);
+    this.updateSelectedDay = this.updateSelectedDay.bind(this);
   }
   
     createEvent (title ) {
@@ -190,11 +61,11 @@ class DayCalendar extends Component {
               hourEntries.push(hourEntry);           
           }
           
-          let displayDay = day.format("dddd, MMMM do, YYYY");
           let dayViewObj = {
               "currentHour": currentHour,
               "hourEntries": hourEntries,
-              "currentDay": displayDay
+              "currentDay": day.format("dddd, MMMM Do, YYYY"),
+              "moment": day
           };
   
           return dayViewObj;
@@ -203,7 +74,52 @@ class DayCalendar extends Component {
       }
     
     changeDay(e) {
+      let changeType = e.target.value;
+      console.log(changeType);
+     
+      let selectedMoment = this.state.days[this.state.selectedDayKey].moment;
 
+      switch (changeType) {
+          case nextDayKey:
+              selectedMoment.add(1, 'days');
+              break;
+          case nextMonthKey:
+              selectedMoment.add(1, 'month');
+              break;
+          case previousDayKey:
+              selectedMoment.add(-1, 'days');
+              break;
+          case prevMonthKey:
+              selectedMoment.add(-1, 'month');
+              break;
+          case todayKey:
+              if (this.state.todayKey === this.state.selectedDayKey) {
+                return;
+              }
+              selectedMoment = this.state.now;
+              break;
+          default:
+              console.log("mystery change");
+              break;
+      }
+
+      this.updateSelectedDay(selectedMoment);
+    }
+
+    updateSelectedDay(selectedMoment) {
+      const selectedMomentKey = selectedMoment.format(dayKeyFormat); 
+      const newState = {
+        selectedDayKey: selectedMomentKey
+      };
+      
+      if (!this.state.days.hasOwnProperty(selectedMomentKey)) {
+        const newDay = this.createDay(selectedMoment);
+        const updatedDays = this.state.days;
+        updatedDays[selectedMomentKey] = newDay;
+        newState.days = updatedDays;          
+      }
+
+      this.setState((prevState) => newState);
     }
     
     render() {
@@ -213,10 +129,13 @@ class DayCalendar extends Component {
       return (
           <div>
               <h3>Day Calendar for {selectedDay.currentDay}</h3>
-              {/* <p>
-                <button key="prev">&lt;</button>
-                <button key="next">&gt;</button>
-              </p> */}
+              <p>
+                <button title="Go back a month" key={prevMonthKey} onClick={this.changeDay} value={prevMonthKey}>&lt;&lt;</button>
+                <button title="Go back a day" key={previousDayKey} onClick={this.changeDay} value={previousDayKey}>&lt;</button>
+                <button title="Return to today" key={todayKey} onClick={this.changeDay} value={todayKey}>Today</button>
+                <button title="Go forward a day" key={nextDayKey} onClick={this.changeDay} value={nextDayKey}>&gt;</button>
+                <button title="Go forward a month" key={nextMonthKey} onClick={this.changeDay} value={nextMonthKey}>&gt;&gt;</button>
+              </p>
               <DayPlanner {...selectedDay} />
           </div>     
       );
