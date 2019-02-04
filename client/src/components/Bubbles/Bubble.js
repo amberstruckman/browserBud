@@ -6,9 +6,14 @@ import Bubblesdata from './Bubblesdata'
 import ReactDOM from 'react-dom';
 import bubblesdata from "./Bubblesdata";
 import Column from './column'
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
+//adding more bubbles, columns
+
+const Container = styled.div`
+display: flex;
+`
 
 
 class Bubbles extends Component {
@@ -31,7 +36,7 @@ class Bubbles extends Component {
     onDragEnd = result => {
         //color in its normal form
         document.body.style.color = 'inherit'
-        const {destination, source, draggableId} = result;
+        const {destination, source, draggableId, type} = result;
 
         if (!destination){
             return;
@@ -44,28 +49,77 @@ class Bubbles extends Component {
             return;
         }
 
-        const column = this.state.columns[source.droppableId];
-        const newTaskIds = Array.from(column.taskIds);
+
+        //logic for reordering columns
+        if (type === "column") {
+            const newColumnOrder = Array.from(this.state.columnOrder);
+            newColumnOrder.splice(source.index, 1);
+            newColumnOrder.splice(destination.index, 0, draggableId);
+
+            const newState = {
+                ...this.state,
+                columnOrder: newColumnOrder
+            }
+            this.setState(newState);
+            return;
+        }
+        //looking at source of id. switching items from one column to another
+        const start = this.state.columns[source.droppableId];
+        const finish = this.state.columns[destination.droppableId];
+
+        //if the beginning and ending columns for the items are the same
+        if (start === finish){
+            const newTaskIds = Array.from(start.taskIds);
 
 
-        //from THAT index, we want to remove, replcae it with the new id (meaning swapping item with that id)
-        newTaskIds.splice(source.index, 1);
-        newTaskIds.splice(destination.index, 0, draggableId);
+            //from THAT index, we want to remove, replcae it with the new id (meaning swapping item with that id)
+            newTaskIds.splice(source.index, 1);
+            newTaskIds.splice(destination.index, 0, draggableId);
+    
+            const newColumn = {
+                ...start,
+                taskIds: newTaskIds
+            }
+    
+    
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newColumn.id]: newColumn,
+                }
+            }
+    
+            this.setState(newState)
+            return;
+        }
+        
 
-        const newColumn = {
-            ...column,
-            taskIds: newTaskIds
+        //moving from one list to another
+        const startTaskIds = Array.from(start.taskIds);
+        startTaskIds.splice(source.index, 1);
+        const newStart = {
+            ...start,
+            taskIds: startTaskIds,
         }
 
+        const finishTaskIds = Array.from(finish.taskIds);
 
-        const newState = {
+        //splice is for inserting the new one into that place
+        finishTaskIds.splice(destination.index, 0, draggableId);
+        const newFinish = {
+            ...finish,
+            taskIds: finishTaskIds,
+        }
+
+        const newState ={
             ...this.state,
             columns: {
-                ...this.state.columns,
-                [newColumn.id]: newColumn,
+                ...this.state.columns, 
+                [newStart.id] : newStart,
+                [newFinish.id] : newFinish,
             }
         }
-
         this.setState(newState)
     }
 
@@ -77,14 +131,29 @@ class Bubbles extends Component {
             onDragStart={this.onDragStart}
             onDragUpdate={this.onDragUpdate}
             onDragEnd={this.onDragEnd}>
-
-                {this.state.columnOrder.map((columnId) => {
+             {/* is not as important. this is for horizontal movements of the panels themselves */}
+            <Droppable 
+            droppableId="all-columns" 
+            direction="horizontal" 
+            type="column"
+            >
+                {provided => (
+            <Container
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                >
+                {this.state.columnOrder.map((columnId, index) => {
                     const column = this.state.columns[columnId];
                     const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
-                    return <Column key={column.id} column={column} tasks={tasks} />
+                    return <Column key={column.id} column={column} tasks={tasks} index={index}/>
                 })}
 
+                {provided.placeholder}
+            </Container>
+              )}
+           
+            </Droppable>
             </DragDropContext>
         );
     }
