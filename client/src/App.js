@@ -15,7 +15,7 @@ import { DragDropContext } from "react-dnd";
 import DayCalendar from "./components/Calendar/DayCalendar";
 import Chat from "./components/Chat/Chat"
 import Bubbles from "./components/Bubbles/Bubble"
-
+import BrowserApi from "./utils/BrowserApi";
 
 class App extends React.Component {
 	constructor() {
@@ -26,7 +26,9 @@ class App extends React.Component {
       browser: null
 		};
 		this._logout = this._logout.bind(this);
-		this._login = this._login.bind(this);
+    this._login = this._login.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.update = this.update.bind(this);
 	}
 	componentDidMount() {
 		axios.get("/auth/user").then(response => {
@@ -79,6 +81,121 @@ class App extends React.Component {
 			});
   };
 
+  handleSaveClick() {
+    const browser = {
+      pages: [
+        {
+          pageTitle: "Here's page one of my super awesome links.",
+          columns: [
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "web tools",
+                  links: [
+                    {
+                      linkTitle: "Google",
+                      linkUrl: "https://www.google.com"
+                    },
+                    {
+                      linkTitle: "Wikipedia",
+                      linkUrl: "https://www.wikipedia.com"
+                    }
+                  ]
+                },
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "social media",
+                  links: [
+                    {
+                      linkTitle: "Facebook",
+                      linkUrl: "https://www.facebook.com"
+                    },
+                    {
+                      linkTitle: "Instagram",
+                      linkUrl: "https://www.instagram.com"
+                    },
+                    {
+                      linkTitle: "LinkedIn",
+                      linkUrl: "https://www.linkedin.com"
+                    },
+                    {
+                      linkTitle: "Reddit",
+                      linkUrl: "https://www.reddit.com"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "news sources",
+                  links: [
+                    {
+                      linkTitle: "The New York Times",
+                      linkUrl: "https://www.nytimes.com"
+                    },
+                    {
+                      linkTitle: "Washington Post",
+                      linkUrl: "https://www.washingtonpost.com"
+                    },
+                    {
+                      linkTitle: "National Public Radio",
+                      linkUrl: "https://www.npr.org"
+                    },
+                    {
+                      linkTitle: "CNN",
+                      linkUrl: "https://www.cnn.com"
+                    },
+                    {
+                      linkTitle: "Seattle Times",
+                      linkUrl: "https://www.seattletimes.com"
+                    },
+                    {
+                      linkTitle: "Politico",
+                      linkUrl: "https://www.politico.com"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              panels: [
+                {
+                  panelType: "linkPanel",
+                  panelTitle: "fun stuff",
+                  links: [
+                    {
+                      linkTitle: "Internet Movie Database",
+                      linkUrl: "https://www.imdb.com"
+                    },
+                    {
+                      linkTitle: "All Music Guide",
+                      linkUrl: "https://www.allmusic.com"
+                    },
+                    {
+                      linkTitle: "Airbnb",
+                      linkUrl: "https://www.airbnb.com"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    this.setState({ browser: browser });
+    BrowserApi.putBrowser(browser);
+  }
+
+  update(browser) {
+    this.setState({ browser: browser });
+    BrowserApi.putBrowser(browser);
+  }
+
 	render() {
     if (this.state.loggedIn) {
       return (
@@ -86,8 +203,8 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} />
-          <SaveButton user={this.state.user} />
+          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} />
+          <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
@@ -113,7 +230,8 @@ class App extends React.Component {
         </div>
       );
     }
-	}
+  }
+
 }
 
 export default DragDropContext(HTML5Backend)(App);
