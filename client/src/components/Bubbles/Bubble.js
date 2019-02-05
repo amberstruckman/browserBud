@@ -131,7 +131,7 @@ class Bubbles extends Component {
 
         console.log(this.props.browser)
         console.log("columnorder", this.state.columnOrder)
-        console.log("pages", this.props.browser.pages[0])
+        console.log("pages", this.props.browser.pages[0].columns[0])
         
         return (
             <DragDropContext 

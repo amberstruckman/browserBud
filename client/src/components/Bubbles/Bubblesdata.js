@@ -1,8 +1,8 @@
 const bubblesdata = {
     tasks: {
-        'task-1': {id: 'task-1', content:"Web tools panel", link:""},
-        'task-2': {id: 'task-2', content:"social media panel", link:""},
-        'task-3': {id: 'task-3', content:"news source", link:""},
+        'task-1': {id: 'task-1', content:"Web tools", link:"google"},
+        'task-2': {id: 'task-2', content:"Wikipedia", link:"www.wikipedia.com"},
+        'task-3': {id: 'task-3', content:"Yahoo", link:"www.yahoo.com"},
         'task-4': {id: 'task-4', content:"Facebook", link:"www.facebook.com"},
         'task-5': {id: 'task-5', content:"LinkedIn", link:"www.linkedin.com"},
         'task-6': {id: 'task-6', content:"Instagram", link:"www.instagram.com"},

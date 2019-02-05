@@ -28,7 +28,7 @@ class Chat extends React.Component{
 
         this.sendMessage = ev => {
             ev.preventDefault();
-            // console.log(this.state.username, this.state.message)
+            console.log(this.state.username, this.state.message)
             socket.emit('SEND_MESSAGE', {
                 author: this.state.username,
                 message: this.state.message
@@ -43,6 +43,8 @@ class Chat extends React.Component{
         
     }
     render(){
+        
+        console.log(this.state.messages)
        
         return (
             <div className="container">
@@ -50,9 +52,11 @@ class Chat extends React.Component{
                     <div className="col-4">
                         <div className="chatCard">
                             <div className="chatCard-body">
-                                <div className="ChatCard-title">Global Chat</div>
+                                <div className="ChatCard-title">Talk To Your Friends</div>
                                 <hr/>
                                 <div className="messages">
+                                {this.state.username}
+                                {this.state.message}
                                     {this.state.messages.map(message => {
                                         return (
                                             <div>{message.author}: {message.message}</div>
