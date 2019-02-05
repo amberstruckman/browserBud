@@ -16,6 +16,7 @@ import DayCalendar from "./components/Calendar/DayCalendar";
 import Bubbles from "./components/Bubbles/Bubble";
 import BrowserApi from "./utils/BrowserApi";
 import Forecast from "./components/Weather/Forecast";
+import EditMode from "./components/EditMode";
 
 class App extends React.Component {
 	constructor() {
@@ -31,6 +32,7 @@ class App extends React.Component {
     this._login = this._login.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.update = this.update.bind(this);
+    this.modeChange = this.modeChange.bind(this);
 	}
 	componentDidMount() {
 		axios.get("/auth/user").then(response => {
@@ -202,6 +204,10 @@ class App extends React.Component {
     BrowserApi.putBrowser(browser);
   }
 
+  modeChange(event) {
+    this.setState({ editMode: event.target.value });
+  }
+
 	render() {
     if (this.state.loggedIn) {
       return (
@@ -209,6 +215,7 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
+          <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
           <Page
             browser={this.state.browser}
             selectedPage={this.state.selectedPage}
