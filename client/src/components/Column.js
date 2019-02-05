@@ -4,13 +4,13 @@ import BrowserApi from "../utils/BrowserApi";
 
 const Column = props => {
 
-  const { browser, selectedPage, id } = props;
+  const { browser, selectedPage, id, update } = props;
   const { panels } = browser.pages[selectedPage].columns[id];
 
   function handleClick() {
     const newLinkPanel = { panelType: "linkPanel", panelTitle: "new linkPanel", links: [] };
     panels.push(newLinkPanel);
-    BrowserApi.putBrowser(browser);
+    update(browser);
   }
 
   return (
