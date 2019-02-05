@@ -4,7 +4,7 @@ import BrowserApi from "../utils/BrowserApi";
 
 const Column = props => {
 
-  const { browser, selectedPage, id, update } = props;
+  const { browser, selectedPage, editMode, id, update } = props;
   const { panels } = browser.pages[selectedPage].columns[id];
 
   function handleClick() {
@@ -15,9 +15,9 @@ const Column = props => {
 
   return (
     <div className="column">{ panels.map((obj, index) =>
-      <Panel browser={browser} selectedPage={selectedPage} key={index} id={index} thisColumn={id} />
+      <Panel browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} thisColumn={id} />
     ) }
-    <button onClick={ function() { handleClick() } }>add linkPanel</button>
+    <div className="plusDiv"><span className="plus" onClick={ function() { handleClick() } }>+ LinkPanel</span></div>
     </div>
   );
 

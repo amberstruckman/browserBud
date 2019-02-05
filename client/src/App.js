@@ -22,7 +22,9 @@ class App extends React.Component {
 		this.state = {
 			loggedIn: false,
       user: null,
-      browser: null
+      browser: null,
+      selectedPage: 0,
+      editMode: false
 		};
 		this._logout = this._logout.bind(this);
     this._login = this._login.bind(this);
@@ -36,14 +38,16 @@ class App extends React.Component {
 					loggedIn: true,
           user: response.data.user,
           browser: response.data.browser,
-          selectedPage: 0
+          selectedPage: 0,
+          editMode: false
 				});
 			} else {
 				this.setState({
 					loggedIn: false,
           user: null,
           browser: null,
-          selectedPage: null
+          selectedPage: null,
+          editMode: false
 				});
 			}
 		});
@@ -57,7 +61,8 @@ class App extends React.Component {
 					loggedIn: false,
           user: null,
           browser: null,
-          selectedPage: null
+          selectedPage: null,
+          editMode: false
 				});
 			}
 		});
@@ -74,7 +79,8 @@ class App extends React.Component {
             loggedIn: true,
             user: response.data.user,
             browser: response.data.browser,
-            selectedPage: 0
+            selectedPage: 0,
+            editMode: false
           });
 				}
 			});
@@ -202,7 +208,11 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} />
+          <Page
+            browser={this.state.browser}
+            selectedPage={this.state.selectedPage}
+            editMode={this.state.editMode}
+            update={this.update} />
           <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
