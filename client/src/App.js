@@ -13,7 +13,8 @@ import TodoList from "./components/TodoPanel/Todolist";
 import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 import DayCalendar from "./components/Calendar/DayCalendar";
-import Bubbles from "./components/Bubbles/Bubble";
+import Chat from "./components/Chat/Chat"
+import Bubbles from "./components/Bubbles/Bubble"
 import BrowserApi from "./utils/BrowserApi";
 import Forecast from "./components/Weather/Forecast";
 import EditMode from "./components/EditMode";
@@ -229,6 +230,8 @@ class App extends React.Component {
           <Route exact path="/signup" component={SignupForm} />
           <TodoList browser={this.state.browser}/>
 					<Bubbles browser={this.state.browser}/>
+					<DayCalendar />
+					<Chat/>
 					<Forecast />
           <DayCalendar />
           
