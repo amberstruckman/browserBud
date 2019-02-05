@@ -204,7 +204,7 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          {/* <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} /> */}
+          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} />
           <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
@@ -213,14 +213,11 @@ class App extends React.Component {
           <Route exact path="/signup" component={SignupForm} />
           <TodoList browser={this.state.browser}/>
 					<Bubbles browser={this.state.browser}/>
-<<<<<<< HEAD
 					<DayCalendar />
 					<Chat/>
-=======
 					<Forecast />
           <DayCalendar />
           
->>>>>>> 2fd53574d269b1c72227272c010337a14d3c556a
         </div>
       );
     } else {
