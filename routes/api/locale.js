@@ -5,9 +5,13 @@ const localeController = require("../../controllers/localeController");
 router.route("/alexa")
   .get(localeController.alexa);
 
+router.route("/list")
+  .get(localeController.findAll);
+
 router.route("/")
-  .get(localeController.findByUser)
-  .post(localeController.create);
+  .get(localeController.find)
+  .post(localeController.create)
+  .put(localeController.update);
 
 // Matches with "/api/locale/:id"
 router

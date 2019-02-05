@@ -25,6 +25,7 @@ const Panel = props => {
   } else if (panelType === "widget") {
     // widgets go here
   }
+  return null;
 }
 
 export default Panel;

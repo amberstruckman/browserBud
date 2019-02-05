@@ -26,6 +26,7 @@ class Forecast extends Component {
 
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.submitLocation = this.submitLocation.bind(this);
+		this.saveLocation = this.saveLocation.bind(this);
 		this.updateLocation = this.updateLocation.bind(this);
 		this.acquireUserLocation = this.acquireUserLocation.bind(this);
 		this.getLocale = this.getLocale.bind(this);
@@ -36,12 +37,10 @@ class Forecast extends Component {
 		this.createAggregateWeather = this.createAggregateWeather.bind(this);
 		this.saveLocation = this.saveLocation.bind(this);
 		this.acquireSavedLocation = this.acquireSavedLocation.bind(this);
-
-		this.acquireUserLocation();
-
 	}
 
 	componentDidMount() {
+		//this.acquireSavedLocation();
 		this.acquireUserLocation();
 	}
 
@@ -62,13 +61,14 @@ class Forecast extends Component {
 		}
 		if (this.state.location.saved) {
 			location.saved = true;
-			location.localeId = this.state.location.localeId;
+			location.name = this.state.location.name;
 		}
 		this.saveLocation(location);
 	}
 
 	saveLocation(location) {
-		LocaleApi.save(location).then(this.updateLocation);
+		//LocaleApi.save(location).then(this.updateLocation);
+		this.updateLocation(location);
 	}
 
 	updateLocation(location) {

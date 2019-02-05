@@ -12,7 +12,7 @@ const LocaleSchema = new Schema({
   userId: {type: Schema.ObjectId, required: false},
   locationName: {type: String, default: "home"}
 });
-LocaleSchema.index({"userId": 1, "locationName": 1});
+LocaleSchema.index({"userId": 1, "locationName": 1}, {"unique": true});
 const Locales = mongoose.model("locales", LocaleSchema);
 
 module.exports = Locales;

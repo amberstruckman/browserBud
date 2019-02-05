@@ -1,5 +1,4 @@
 import axios from "axios";
-import { isArray } from "util";
 
 const basePath = "/api/locale"
 
@@ -17,8 +16,8 @@ function locationToLocale(location) {
         locale.latitude = location.latitude;
         locale.longitude = location.longitude;
     }
-    if (location.save) {
-        locale._id = location.localeId;
+    if (location.saved && location.name) {
+        locale.locationName = location.name;
     }
 
     return locale; 
@@ -28,7 +27,7 @@ function localeToLocation(locale) {
     const location = {
         "query": locale.query,
         "saved": true,
-        "localeId": locale._id
+        "name": locale.locationName
     };
     if (locale.city) {
         location.city = locale.city;
@@ -49,12 +48,12 @@ export default {
         const locale = locationToLocale(location);
         
         if (location.saved) {
-            return axios.put(`${basePath}/${location.localeId}`, locale);
+            return axios.put(`${basePath}`, locale).then(response => localeToLocation(response.data));
         } else {
-            return axios.post(basePath, locale);
+            return axios.post(basePath, locale).then(response => localeToLocation(response.data));
         }
     },
     get: function() {
-        return axios.get(basePath).then(locale => isArray(locale) ? localeToLocation(locale[0]) : localeToLocation(locale));
+        return axios.get(basePath).then(response => localeToLocation(response.data));
     }
 }
