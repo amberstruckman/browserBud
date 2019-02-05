@@ -5,11 +5,13 @@ const defaultLocationParameter = "q=Seattle";
 function getLocationParameters(location) {
     if (!location) {
         return defaultLocationParameter;
-    } else if( location.hasOwnProperty("lat") && location.hasOwnProperty("lon")) {
+    } else if( location.lat && location.lon) {
         return `lat=${location.lat}&lon=${location.lon}`
-    } else if (location.hasOwnProperty("zip")) {
+    } else if( location.latitude && location.longitude) {
+        return `lat=${location.latitude}&lon=${location.longitude}`
+    } else if (location.zip) {
         return `zip=${location.zip}`;
-    } else if (location.hasOwnProperty("city")) {
+    } else if (location.city) {
         return `q=${location.city}`;
     }
     return defaultLocationParameter;
