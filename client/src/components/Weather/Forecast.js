@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Weather from './Weather';
-import Api from '../../utils/WeatherApi';
+import WeatherApi from '../../utils/WeatherApi';
+import LocaleApi from '../../utils/LocaleApi'
 
 const defaultForecast = { "list": [] };
 const locationInputKey = "location-input";
@@ -10,8 +11,8 @@ const positionOptions = {
 	timeout: 5000, //5 second timeout
 	maximumAge: 300000 //refresh after 5 minutes
 }
-const isZipCode = /^(\s*)(\d{5})(-\d{4})?(\s*)$/;
-const isLatLon = /^(\s*)(-?\d{1,3})(\.\d*)?([\s,]+)(-?\d{1,3})(\.\d*)?(\s*)$/;
+const isZipCode = /^(\d{5})(-\d{4})?$/;
+const isLatLon = /^(-?\d{1,3})(\.\d*)?([\s,]+)(-?\d{1,3})(\.\d*)?$/;
 
 class Forecast extends Component {
 
@@ -33,6 +34,11 @@ class Forecast extends Component {
 		this.groupWeatherByDay = this.groupWeatherByDay.bind(this);
 		this.selectWeatherForDay = this.selectWeatherForDay.bind(this);
 		this.createAggregateWeather = this.createAggregateWeather.bind(this);
+		this.saveLocation = this.saveLocation.bind(this);
+		this.acquireSavedLocation = this.acquireSavedLocation.bind(this);
+
+		this.acquireUserLocation();
+
 	}
 
 	componentDidMount() {
@@ -42,33 +48,57 @@ class Forecast extends Component {
 	submitLocation(e) {
 		e.preventDefault();
 		const input = this.locationInput.value;
+		const location = {
+			"query": input.trim()
+		};
 		if (isLatLon.test(input)) {
-			const json = input.replace(isLatLon, "{lat: $2, lon: $6}");
 			const matches = isLatLon.exec(input);
-			const gpsLocation = {
-				latitude: matches[2] + (matches[3] || ""),
-				longitude: matches[5] + (matches[6] || "")
-			};
-			this.updateLocation(gpsLocation);
-		}
-		if (isZipCode.test(input)) {
-			this.updateLocation({zip: input.replace(isZipCode, "$2")});
+			location.latitude = matches[1] + (matches[2] || "");
+			location.longitude= matches[4] + (matches[5] || "");
+		} else if (isZipCode.test(input)) {
+			location.zip = input.replace(isZipCode, "$1");
 		} else {
-			this.updateLocation({city: input.trim()});
+			location.city = location.query;
 		}
+		if (this.state.location.saved) {
+			location.saved = true;
+			location.localeId = this.state.location.localeId;
+		}
+		this.saveLocation(location);
+	}
+
+	saveLocation(location) {
+		LocaleApi.save(location).then(this.updateLocation);
 	}
 
 	updateLocation(location) {
+		console.log("update location");
 		this.setState({
 			location: location
 		}, () => this.getWeather(location));
 	}
 
+	acquireSavedLocation() {
+		LocaleApi.get()
+			.then(
+				location => location, 
+				(err) => {
+					console.log(err);
+					return null;
+				})
+			.then(location => {
+				if (location) {
+					this.updateLocation(location);
+				} else {
+					this.acquireUserLocation();
+				}});
+	}
+
 	acquireUserLocation() {
 		if (navigator && navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
-				(position) => {console.log(JSON.stringify(position)); this.updateLocation(position.coords)},
-				(error) => {console.log(JSON.stringify(error)); this.updateLocation(defaultLocation)},
+				(position) => {console.log(position); this.updateLocation(position.coords)},
+				(error) => {console.log(error); this.updateLocation(defaultLocation)},
 				positionOptions
 			);
 		}
@@ -95,7 +125,7 @@ class Forecast extends Component {
 	}
 
 	getWeather(location){
-		Api.getForecast(location)
+		WeatherApi.getForecast(location)
 			.then(data => {
 				this.setState({
 					forecast: data
@@ -192,7 +222,6 @@ class Forecast extends Component {
 	render() {
 		const data = this.state.forecast;
 		const forecast = data.list.reduce(this.groupWeatherByDay, [])
-//			.filter((forecast, index) => index % 8 === 0 && index / 8 < 3)
 			.map((weather, index) => {
 				return (<Weather key={`weather${index}`} {...weather} />)
 		});
