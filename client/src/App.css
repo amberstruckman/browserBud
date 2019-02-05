@@ -26,10 +26,11 @@
 
 .panel {
   background-color: white;
+  box-shadow: 3px 3px 2px gray;
   margin: 10px;
   padding: 10px;
-  border-radius: 10px;
-  border: 1px solid darkblue;
+  border-radius: 4px;
+  /* border: 1px solid darkblue; */
   text-align: left;
   width: 200px;
 }
@@ -41,4 +42,13 @@
 .flex-container {
   display: flex;
   justify-content: center;
+}
+
+.plus {
+  background-color: lightgreen;
+  box-shadow: 1px 1px 1px green;
+  color: darkgreen;
+  border: 1px solid darkgreen;
+  border-radius: 4px;
+  padding: 2px 6px;
 }
