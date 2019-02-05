@@ -8,7 +8,6 @@ import bubblesdata from "./Bubblesdata";
 import Column from './column'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import BrowserApi from '../../utils/BrowserApi'
 
 //adding more bubbles, columns
 
@@ -18,9 +17,6 @@ display: flex;
 
 
 class Bubbles extends Component {
-
-    browser = this.props.browser;
-    
     state = bubblesdata;
 
     onDragStart = () => {
@@ -129,10 +125,6 @@ class Bubbles extends Component {
 
     render() {
 
-        console.log(this.props.browser)
-        console.log("columnorder", this.state.columnOrder)
-        console.log("pages", this.props.browser.pages[0].columns[0])
-        
         return (
             <DragDropContext 
             
@@ -152,7 +144,6 @@ class Bubbles extends Component {
                 >
                 {this.state.columnOrder.map((columnId, index) => {
                     const column = this.state.columns[columnId];
-                    console.log("columnid", column)
                     const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
                     return <Column key={column.id} column={column} tasks={tasks} index={index}/>
