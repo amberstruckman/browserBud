@@ -206,7 +206,7 @@ class App extends React.Component {
   }
 
   modeChange(event) {
-    this.setState({ editMode: event.target.value });
+    this.setState({ editMode: event.target.checked });
   }
 
 	render() {
@@ -216,13 +216,13 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
           <Page
             browser={this.state.browser}
             selectedPage={this.state.selectedPage}
             editMode={this.state.editMode}
             update={this.update} />
           <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
+          <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
