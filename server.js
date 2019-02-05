@@ -12,6 +12,15 @@ const app = express()
 const PORT = process.env.PORT || 3001;
 const apiRoutes = require('./routes');
 
+//socket
+var cors = require('cors');
+const http = require('http')
+const server = http.createServer(app)
+var io = require('socket.io').listen(server);  
+
+//cors unblocked
+app.use(cors());
+
 // ===== Middleware ====
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
@@ -81,6 +90,24 @@ app.use(function(err, req, res, next) {
 	console.error(err.stack)
 	res.status(500)
 })
+
+
+
+// Socket listeners
+// This is what the socket.io syntax is like
+io.on('connection', socket => {
+	console.log('New client connected')
+	
+	socket.on('SEND_MESSAGE', function(data){
+		console.log(data);
+		io.emit('RECEIVE_MESSAGE', data);
+	})
+	
+// 	// disconnect is fired when a client leaves the server
+	socket.on('disconnect', () => {
+	  console.log('user disconnected')
+	})
+  });
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
