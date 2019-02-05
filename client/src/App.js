@@ -17,6 +17,7 @@ import Chat from "./components/Chat/Chat"
 import Bubbles from "./components/Bubbles/Bubble"
 import BrowserApi from "./utils/BrowserApi";
 import Forecast from "./components/Weather/Forecast";
+import EditMode from "./components/EditMode";
 
 class App extends React.Component {
 	constructor() {
@@ -24,12 +25,15 @@ class App extends React.Component {
 		this.state = {
 			loggedIn: false,
       user: null,
-      browser: null
+      browser: null,
+      selectedPage: 0,
+      editMode: false
 		};
 		this._logout = this._logout.bind(this);
     this._login = this._login.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.update = this.update.bind(this);
+    this.modeChange = this.modeChange.bind(this);
 	}
 	componentDidMount() {
 		axios.get("/auth/user").then(response => {
@@ -38,14 +42,16 @@ class App extends React.Component {
 					loggedIn: true,
           user: response.data.user,
           browser: response.data.browser,
-          selectedPage: 0
+          selectedPage: 0,
+          editMode: false
 				});
 			} else {
 				this.setState({
 					loggedIn: false,
           user: null,
           browser: null,
-          selectedPage: null
+          selectedPage: null,
+          editMode: false
 				});
 			}
 		});
@@ -59,7 +65,8 @@ class App extends React.Component {
 					loggedIn: false,
           user: null,
           browser: null,
-          selectedPage: null
+          selectedPage: null,
+          editMode: false
 				});
 			}
 		});
@@ -76,7 +83,8 @@ class App extends React.Component {
             loggedIn: true,
             user: response.data.user,
             browser: response.data.browser,
-            selectedPage: 0
+            selectedPage: 0,
+            editMode: false
           });
 				}
 			});
@@ -197,6 +205,10 @@ class App extends React.Component {
     BrowserApi.putBrowser(browser);
   }
 
+  modeChange(event) {
+    this.setState({ editMode: event.target.checked });
+  }
+
 	render() {
     if (this.state.loggedIn) {
       return (
@@ -204,8 +216,13 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} />
+          <Page
+            browser={this.state.browser}
+            selectedPage={this.state.selectedPage}
+            editMode={this.state.editMode}
+            update={this.update} />
           <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
+          <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
