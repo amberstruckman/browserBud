@@ -39,8 +39,6 @@ class Forecast extends Component {
 		this.acquireUserLocation();
 	}
 
-	
-
 	submitLocation(e) {
 		e.preventDefault();
 		const input = this.locationInput.value;
