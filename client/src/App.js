@@ -27,6 +27,7 @@ class App extends React.Component {
 		this._logout = this._logout.bind(this);
     this._login = this._login.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.update = this.update.bind(this);
 	}
 	componentDidMount() {
 		axios.get("/auth/user").then(response => {
@@ -185,8 +186,13 @@ class App extends React.Component {
         }
       ]
     };
-    BrowserApi.putBrowser(browser);
     this.setState({ browser: browser });
+    BrowserApi.putBrowser(browser);
+  }
+
+  update(browser) {
+    this.setState({ browser: browser });
+    BrowserApi.putBrowser(browser);
   }
 
 	render() {
@@ -196,7 +202,7 @@ class App extends React.Component {
           {/* <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
           <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
-          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} />
+          <Page browser={this.state.browser} selectedPage={this.state.selectedPage} update={this.update} />
           <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
           <br /> <hr />
           <Route exact path="/login" render={() =>
