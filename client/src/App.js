@@ -15,6 +15,7 @@ import { DragDropContext } from "react-dnd";
 import DayCalendar from "./components/Calendar/DayCalendar";
 import Bubbles from "./components/Bubbles/Bubble";
 import BrowserApi from "./utils/BrowserApi";
+import Forecast from "./components/Weather/Forecast";
 
 class App extends React.Component {
 	constructor() {
@@ -221,7 +222,9 @@ class App extends React.Component {
           <Route exact path="/signup" component={SignupForm} />
           <TodoList browser={this.state.browser}/>
 					<Bubbles browser={this.state.browser}/>
-					<DayCalendar />
+					<Forecast />
+          <DayCalendar />
+          
         </div>
       );
     } else {
