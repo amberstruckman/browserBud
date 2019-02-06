@@ -111,6 +111,6 @@ io.on('connection', socket => {
   });
 
 // ==== Starting Server =====
-server.listen(PORT, () => {
+app.listen(PORT, () => {
 	console.log(`App listening on PORT ${PORT}`)
 })
