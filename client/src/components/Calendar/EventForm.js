@@ -1,4 +1,4 @@
-import Component from "react";
+import React, { Component } from "react";
 
 const eventTitleField = "event-title";
 const eventStartField = "event-start";
@@ -9,39 +9,37 @@ class EventForm extends Component {
 
     constructor(props) {
         super(props);
-
         this.createEvent = this.createEvent.bind(this)
-        this.submitEvent = this.submitEvent.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     createEvent (title, day, start, duration) {
         return {
             "title": title,
             "day": day, 
-            "start": start,
-            "duration": duration
+            "start": parseInt(start),
+            "duration": parseInt(duration)
         };
     }
 
-    submitEvent(e) {
+    submit(e) {
         e.preventDefault();
         e.stopPropagation();
 
         const newEvent = this.createEvent(this.titleField.value, this.dayField.value, this.startField.value, this.durationField.value);
-        this.props.publishEvent(newEvent);
-
-        return false;
+        this.props.publish(newEvent);
     }
 
     render() {
         return (
-            <form key="eventForm" onSubmit={this.submitEvent}>
+            <form key="eventForm" onSubmit={this.submit}>
                 <p>
                     <input 
                         type="text" 
                         key={eventTitleField} 
                         name={eventTitleField} 
                         ref={(x) => this.titleField = x}
+                        defaultValue={this.props.title}
                         />
                     <input 
                         type="hidden" 
@@ -69,30 +67,6 @@ class EventForm extends Component {
             </form>  
         );
     }
-
-    // render() {
-    //     return (
-    //         <form key="eventForm" onSubmit={this.submitEvent}>
-    //             <p>
-    //                 <label for={eventTitleField}>Name</label>
-    //                 <input name={eventTitleField} key={eventTitleField} type="text" />
-    //             </p>
-    //             <p>
-    //                 <label for={eventTitleField}>Name</label>
-    //                 <input name={eventTitleField} key={eventTitleField} type="text" />
-    //             </p>
-    //             <p>
-    //                 <label for={eventTitleField}>Name</label>
-    //                 <input name={eventTitleField} key={eventTitleField} type="text" />
-    //             </p>
-    //             <p>
-    //                 <label for={eventTitleField}>Name</label>
-    //                 <input name={eventTitleField} key={eventTitleField} type="text" />
-    //             </p>
-    //             <p>
-    //                 <button type="submit">Save</button>
-    //             </p>
-    //         </form>
-    //     );
-    // }
 }
+
+export default EventForm;

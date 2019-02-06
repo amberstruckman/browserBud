@@ -5,8 +5,19 @@ const newEvent = "new-event";
 class HourPlanner extends Component {
     constructor(props) {
       super(props);
+
+      this.newEvent = this.newEvent.bind(this);
     }
 
+    newEvent(e) {
+      this.props.openNewEvent({
+        title: undefined,
+        day: this.props.day,
+        start: this.props.hour,
+        displayStart: this.props.displayHour,
+        duration: 60
+      });
+    }
 
 
     render() {
@@ -29,7 +40,7 @@ class HourPlanner extends Component {
         <tr className={timeClass}>
           <td>{this.props.displayHour}</td>
           <td>{events  }</td>
-          <td><button key={newEvent} title="Add something" value={newEvent} onClick={this.props.newEvent}>+</button></td>
+          <td><button key={newEvent} title="Add something" value={newEvent} onClick={this.newEvent}>+</button></td>
         </tr>
       );
     }

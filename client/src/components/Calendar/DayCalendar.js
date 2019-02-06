@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import moment from "moment"; 
 import DayPlanner from "./DayPlanner";
 import "./DayCalendar.css";
+// import HourEntry from "./HourEntry";
+import EventForm from "./EventForm";
 
 const previousDayKey = "prev-day";
 const nextDayKey = "next-day";
@@ -11,50 +13,81 @@ const todayKey = "today";
 const dayKeyFormat = "YYYY-MM-DD";
 
 class DayCalendar extends Component { 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    const thisIsTheMoment = moment();
-    const dayKey = thisIsTheMoment.format(dayKeyFormat);
-    const days = {};
-    days[dayKey] = this.createDay(thisIsTheMoment);
-    this.state = {
-      now: thisIsTheMoment,
-      days: days,
-      todayKey: dayKey,
-      selectedDayKey: dayKey
-    };
+        const thisIsTheMoment = moment();
+        const dayKey = thisIsTheMoment.format(dayKeyFormat);
+        const days = {};
+        days[dayKey] = this.createDay(thisIsTheMoment);
+        this.state = {
+            now: thisIsTheMoment,
+            days: days,
+            todayKey: dayKey,
+            selectedDayKey: dayKey,
+            event: {
+              publish: this.saveEvent,
+              seed: null
+            }
+        };
 
-    this.changeDay = this.changeDay.bind(this);
-    this.updateSelectedDay = this.updateSelectedDay.bind(this);
-    this.openEventForm = this.openEventForm.bind(this);
-  }
+        this.changeDay = this.changeDay.bind(this);
+        this.updateSelectedDay = this.updateSelectedDay.bind(this);
+        this.openEventForm = this.openEventForm.bind(this);
+        this.saveEvent = this.saveEvent.bind(this);
+    }
 
-      openEventForm(e) {
-        //get time as defualt time
-        //set default duration as one hour
-        //set day
-      }
+    openEventForm(seed) {
+      this.setState({
+        event: {
+          publish: this.saveEvent,
+          seed: seed
+        }
+      })
+    }
 
-      saveEvent(e) {
-        //create event from form
-
-      }
-
-      asDisplayableHour(hour) {
-        let from12 = hour % 12;
-
-        return `${from12 === 0 ? 12 : from12}:00 ${from12 === hour ? "AM" : "PM"}`;
-      }
-  
-      createEvent (title ) {
+    saveEvent(newEvent) {
+      //create event from form
+      console.log("published new event" + JSON.stringify(newEvent));
+      //save it to db
+      //put it in local state
+      //clear the form
+      this.setState((prevState) => {
+          const days = prevState.days;
+          const hours = days[newEvent.day].hourEntries;
+          let added = false;
+          days[newEvent.day].hourEntries = hours.map((entry, index) => {
+            if (!added && entry.hour == newEvent.start) {
+              added = true;
+              entry.events.push(newEvent)
+            }
+            return entry;
+          });
+          //handle case where added event is not in the current range
           return {
-              "title": title,
-              //day 
-              //start
-              //duration
-          };
-      }
+            days: days,
+            event: {
+              publish: this.saveEvent,
+              seed: null
+            }
+          }
+      });
+    }
+
+    asDisplayableHour(hour) {
+      let from12 = hour % 12;
+
+      return `${from12 === 0 ? 12 : from12}:00 ${from12 === hour ? "AM" : "PM"}`;
+    }
+
+    createEvent (title, day, start, duration ) {
+        return {
+            "title": title,
+            "day": day, 
+            "start": start,
+            "duration": duration
+        };
+    }
   
     createHour (day, hour, currentHour, ...events) {
           return {
@@ -140,7 +173,10 @@ class DayCalendar extends Component {
     
     render() {
 
-      var selectedDay = this.state.days[this.state.selectedDayKey];
+      let selectedDay = this.state.days[this.state.selectedDayKey];
+      let eventForm = this.state.event.seed ?
+        (<EventForm publish={this.state.event.publish} {...this.state.event.seed} />) 
+        : "";
       //alert(JSON.strignify(dayViewObj));
       return (
           <div>
@@ -151,7 +187,8 @@ class DayCalendar extends Component {
                 <button title="Go forward a day" key={nextDayKey} onClick={this.changeDay} value={nextDayKey}>&gt;</button>
                 <button title="Go forward a month" key={nextMonthKey} onClick={this.changeDay} value={nextMonthKey}>&gt;&gt;</button>
               </p>
-              <DayPlanner {...selectedDay} />
+              <DayPlanner openNewEvent={this.openEventForm} {...selectedDay} />
+              {eventForm}
           </div>     
       );
     }
