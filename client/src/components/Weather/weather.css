@@ -41,3 +41,14 @@
 	color:#fff;
 	text-transform: capitalize;
 }
+
+.forecastbubble{
+background-color: paleturquoise;
+box-shadow: 3px 3px 2px gray;
+margin: 5px;
+padding: 5px;
+border-radius: 4px;
+/* border: 1px solid darkblue; */
+text-align: left;
+width: 300px;
+}

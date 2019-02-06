@@ -250,6 +250,7 @@ class App extends React.Component {
 					<Chat/>
 					<Forecast />
           
+          
         </div>
       );
     } else {

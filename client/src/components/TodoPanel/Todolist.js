@@ -93,6 +93,7 @@ class TodoList extends Component {
 
   
     return (
+      <div className="todolistbubble">
       <div className="todoListMain">
         <div className="header">
           <form onSubmit={this.addItem}>
@@ -104,6 +105,7 @@ class TodoList extends Component {
         </div>
         <TodoItems entries={this.state.items}
         delete={this.deleteItem}/>
+      </div>
       </div>
     );
   }
