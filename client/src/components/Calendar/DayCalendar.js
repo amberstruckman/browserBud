@@ -72,7 +72,7 @@ class DayCalendar extends Component {
           const dayKey = momentToCreate.format(dayKeyFormat);
           var hourEntries = [];
   
-          for (let index = 0; index < 24; index++) {
+          for (let index = currentHour - 1; index < currentHour + 6; index++) {
               //var event = this.createEvent("EventTitle"+ index);
               var hourEntry= this.createHour(dayKey, index, currentHour);
               hourEntries.push(hourEntry);           
@@ -144,7 +144,6 @@ class DayCalendar extends Component {
       //alert(JSON.strignify(dayViewObj));
       return (
           <div>
-              <h3>Day Calendar for {selectedDay.currentDay}</h3>
               <p>
                 <button title="Go back a month" key={prevMonthKey} onClick={this.changeDay} value={prevMonthKey}>&lt;&lt;</button>
                 <button title="Go back a day" key={previousDayKey} onClick={this.changeDay} value={previousDayKey}>&lt;</button>
