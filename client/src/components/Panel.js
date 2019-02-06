@@ -19,7 +19,7 @@ const Panel = props => {
         <div>{ links.map((obj, index) =>
           <Link browser={browser} selectedPage={selectedPage} editMode={editMode} thisColumn={thisColumn} linkUrl={obj.linkUrl} linkTitle={obj.linkTitle} key={index} />
         )}</div>
-        <div><span className="plus" onClick={ function() { handleClick() } }>+ Link</span></div>
+        {editMode && <div><span className="plus" onClick={ function() { handleClick() } }>+ Link</span></div>}
       </div>
     );
   } else if (panelType === "widget") {

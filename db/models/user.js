@@ -4,6 +4,27 @@ const bcrypt = require('bcryptjs')
 mongoose.promise = Promise
 
 // Define userSchema
+const browser = {
+  pages: [
+    {
+      pageTitle: "Page one",
+      columns: [
+        {
+          panels: [
+            {
+              panelType: "linkPanel",
+              panelTitle: "web tools",
+              links: []
+            },
+
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
 const userSchema = new Schema({
 	local: {
 		email: { type: String, unique: true, required: true },
@@ -12,7 +33,7 @@ const userSchema = new Schema({
 	google: {
 		googleId: { type: String, required: false }
   },
-  browser: { type: Schema.Types.Mixed } 
+  browser: { type: Schema.Types.Mixed, default: browser } 
 });
 
 // Define schema methods

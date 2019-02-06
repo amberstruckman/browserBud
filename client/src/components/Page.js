@@ -18,7 +18,7 @@ const Page = props => {
       <div className="flex-container">{ columns.map((obj, index) =>
         <Column browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} update={update} />
       )}
-      <div className="column"><span className="plus" onClick={ function() { handleClick() } }>+ Column</span></div>
+      {editMode && <div className="column"><span className="plus" onClick={ function() { handleClick() } }>+ Column</span></div>}
       </div>
     </div>
   );

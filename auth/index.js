@@ -35,6 +35,7 @@ router.post(
 	},
 	passport.authenticate('local'),
 	(req, res) => {
+    console.log(req.user);
     const user = JSON.parse(JSON.stringify(req.user)) // hack
     const browser = JSON.parse(JSON.stringify(req.user.browser));
     const cleanUser = Object.assign({}, user);
@@ -67,7 +68,8 @@ router.post('/signup', (req, res) => {
 		}
 		const newUser = new User({
 			'local.email': email,
-			'local.password': password
+      'local.password': password,
+      'browser': {}
 		})
 		newUser.save((err, savedUser) => {
 			if (err) return res.json(err)
