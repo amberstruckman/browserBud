@@ -24,11 +24,10 @@ class LoginForm extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		console.log('handleSubmit')
 		this.props._login(this.state.email, this.state.password)
-		// this.setState({
-		// 	redirectTo: '/'
-		// })
+		this.setState({
+			redirectTo: '/'
+		})
 	}
 
 	render() {
@@ -57,7 +56,7 @@ class LoginForm extends Component {
 					</form>
 					<a href="/auth/google">
 						{/* <GoogleButton /> */}
-						<img src={googleButton} alt="sign into Google Button" />
+						{/* <img src={googleButton} alt="sign into Google Button" /> */}
 					</a>
 				</div>
 			)

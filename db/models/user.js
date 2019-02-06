@@ -7,23 +7,21 @@ mongoose.promise = Promise
 const browser = {
   pages: [
     {
-      pageTitle: "Page one",
+      pageTitle: "New Page",
       columns: [
         {
           panels: [
             {
               panelType: "linkPanel",
-              panelTitle: "web tools",
+              panelTitle: "New LinkPanel",
               links: []
             },
-
           ]
         }
       ]
     }
   ]
 };
-
 
 const userSchema = new Schema({
 	local: {

@@ -14,7 +14,7 @@ const Page = props => {
 
   return (
     <div className="page">
-      <div className="pageTitle">{pageTitle}</div>
+      {/* <div className="pageTitle">{pageTitle}</div> */}
       <div className="flex-container">{ columns.map((obj, index) =>
         <Column browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} update={update} />
       )}
