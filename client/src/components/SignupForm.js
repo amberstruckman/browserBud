@@ -28,9 +28,8 @@ class SignupForm extends Component {
 				password: this.state.password
 			})
 			.then(response => {
-				console.log(response)
 				if (!response.data.errmsg) {
-					console.log('SUCCESSFUL LOGIN')
+					// console.log('SUCCESSFUL LOGIN')
 					this.setState({
 						redirectTo: '/login'
 					})

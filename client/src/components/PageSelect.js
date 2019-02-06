@@ -7,7 +7,7 @@ const PageSelect = props => {
 
   return (
     <div className="PageSelect">
-      <select value={selectedPage} onChange={this.pageSelectChange}>
+      <select value={selectedPage} onChange={onChange}>
       { pages.map((obj, index) =>
         <option value={index}>{obj.pageTitle}</option>
       )}
