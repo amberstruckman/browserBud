@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom'
 import googleButton from './google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png'
 
 class LoginForm extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			email: '',
 			password: '',
@@ -13,7 +13,7 @@ class LoginForm extends Component {
 		}
 		// this.googleSignin = this.googleSignin.bind(this) //
 		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
 	}
 
 	handleChange(event) {
@@ -26,9 +26,9 @@ class LoginForm extends Component {
 		event.preventDefault()
 		console.log('handleSubmit')
 		this.props._login(this.state.email, this.state.password)
-		this.setState({
-			redirectTo: '/'
-		})
+		// this.setState({
+		// 	redirectTo: '/'
+		// })
 	}
 
 	render() {

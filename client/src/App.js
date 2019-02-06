@@ -18,6 +18,7 @@ import Bubbles from "./components/Bubbles/Bubble"
 import BrowserApi from "./utils/BrowserApi";
 import Forecast from "./components/Weather/Forecast";
 import EditMode from "./components/EditMode";
+import PageSelect from "./components/PageSelect";
 
 class App extends React.Component {
 	constructor() {
@@ -34,6 +35,7 @@ class App extends React.Component {
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.update = this.update.bind(this);
     this.modeChange = this.modeChange.bind(this);
+    this.pageSelectChange = this.pageSelectChange.bind(this);
 	}
 	componentDidMount() {
 		axios.get("/auth/user").then(response => {
@@ -87,7 +89,7 @@ class App extends React.Component {
             editMode: false
           });
 				}
-			});
+			}).catch(error => console.log(error));
   };
 
   handleSaveClick() {
@@ -209,13 +211,23 @@ class App extends React.Component {
     this.setState({ editMode: event.target.checked });
   }
 
+  pageSelectChange(event) {
+    // return array of pageTitles
+    const browser = this.state.browser;
+    const pages = browser.pages;
+    const pageTitles = pages.map((obj, index) => {
+      return obj.pageTitle;
+    });
+  }
+
 	render() {
     if (this.state.loggedIn) {
       return (
         <div className="App">
-          {/* <h1>BrowserBud!</h1>
+          <h1>BrowserBud!</h1>
           <Header user={this.state.user} />
-          <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
+          <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
+          {/* <PageSelect browser={this.state.browser} value={this.state.selectedPage} onChange={this.pageSelectChange} /> */}
           <Page
             browser={this.state.browser}
             selectedPage={this.state.selectedPage}
