@@ -233,7 +233,6 @@ class App extends React.Component {
 					<DayCalendar />
 					<Chat/>
 					<Forecast />
-          <DayCalendar />
           
         </div>
       );
