@@ -27,45 +27,61 @@ class DayCalendar extends Component {
 
     this.changeDay = this.changeDay.bind(this);
     this.updateSelectedDay = this.updateSelectedDay.bind(this);
+    this.openEventForm = this.openEventForm.bind(this);
   }
+
+      openEventForm(e) {
+        //get time as defualt time
+        //set default duration as one hour
+        //set day
+      }
+
+      saveEvent(e) {
+        //create event from form
+
+      }
+
+      asDisplayableHour(hour) {
+        let from12 = hour % 12;
+
+        return `${from12 === 0 ? 12 : from12}:00 ${from12 === hour ? "AM" : "PM"}`;
+      }
   
-    createEvent (title ) {
-        return {
-            "title": title 
-            //duration
-            //start
-            //end
+      createEvent (title ) {
+          return {
+              "title": title,
+              //day 
+              //start
+              //duration
           };
       }
   
-    createHour (hour, currentHour, ...events) {
+    createHour (day, hour, currentHour, ...events) {
           return {
+              "day": day,
               "hour": hour, //numeric hour
-              "displayHour": hour.toString(), //might be useful separate the way you want to display hour from the numeric hour
+              "displayHour": this.asDisplayableHour(hour), //might be useful separate the way you want to display hour from the numeric hour
               "current": hour === currentHour,
               "past": hour < currentHour,
-              "events": events
+              "events": events || []
           };
       }
   
-    createDay(momentToCreate) {//would this work better as a 12-hour hour or a 24-hour hour?
-          //given the current hour, build an array of hours to display
-          //Version 1: the array should contain an hour entry for each hour of the day
-          const day = momentToCreate || moment();
-          const currentHour = day.hour();
+    createDay(momentToCreate) {
+          const currentHour = momentToCreate.hour();
+          const dayKey = momentToCreate.format(dayKeyFormat);
           var hourEntries = [];
   
-          for (let index = 1; index <= 24; index++) {
-              var event = this.createEvent("EventTitle"+ index);
-              var hourEntry= this.createHour(index, currentHour, event);
+          for (let index = currentHour - 1; index < currentHour + 6; index++) {
+              //var event = this.createEvent("EventTitle"+ index);
+              var hourEntry= this.createHour(dayKey, index, currentHour);
               hourEntries.push(hourEntry);           
           }
           
           let dayViewObj = {
-              "currentHour": currentHour,
               "hourEntries": hourEntries,
-              "currentDay": day.format("dddd, MMMM Do, YYYY"),
-              "moment": day
+              "currentDay": momentToCreate.format("dddd, MMMM Do, YYYY"),
+              "moment": momentToCreate
           };
   
           return dayViewObj;
@@ -77,7 +93,7 @@ class DayCalendar extends Component {
       let changeType = e.target.value;
       console.log(changeType);
      
-      let selectedMoment = this.state.days[this.state.selectedDayKey].moment;
+      let selectedMoment = moment(this.state.days[this.state.selectedDayKey].moment.toDate());
 
       switch (changeType) {
           case nextDayKey:
@@ -128,7 +144,6 @@ class DayCalendar extends Component {
       //alert(JSON.strignify(dayViewObj));
       return (
           <div>
-              <h3>Day Calendar for {selectedDay.currentDay}</h3>
               <p>
                 <button title="Go back a month" key={prevMonthKey} onClick={this.changeDay} value={prevMonthKey}>&lt;&lt;</button>
                 <button title="Go back a day" key={previousDayKey} onClick={this.changeDay} value={previousDayKey}>&lt;</button>
