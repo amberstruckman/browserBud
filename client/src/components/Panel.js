@@ -2,33 +2,35 @@ import React from "react";
 import Link from "./Link";
 
 class Panel extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = {
-      linkUrl: "",
-      linkTitle: ""
-    };
+    this.state = { linkUrl: "", linkTitle: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    let value = event.target.value;
-    const name = event.target.name;
-    this.setState({ [name]: value });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    if (!this.state.linkUrl || !this.state.linkTitle) {
-      alert("Please enter both a link URL and a link title");
+    let linkUrl = this.state.linkUrl;
+    const linkTitle = this.state.linkTitle ? this.state.linkTitle : linkUrl;
+    if (!linkUrl) {
+      alert("Please enter a link URL.");
     } else {
-      alert("The new link will be to " + this.state.linkTitle + " at " + this.state.linkUrl);
+      if (!/^https?:\/\//i.test(linkUrl)) {
+        linkUrl = 'http://' + linkUrl;
+      }
+      let { browser, selectedPage, thisColumn, id, update } = this.props;
+      let { links } = browser.pages[selectedPage].columns[thisColumn].panels[id];
+      const newLink = { linkTitle: linkTitle, linkUrl: linkUrl };
+      links.push(newLink);
+      update(browser);
+      this.setState({ linkUrl: "", linkTitle: "" });
     }
-    this.setState({
-      linkUrl: "",
-      linkTitle: ""
-    });
   }
 
   render() {
@@ -40,14 +42,34 @@ class Panel extends React.Component {
         <div className="panel">
           <div className="panelTitle">{panelTitle}</div>
           <div>{ links.map((obj, index) =>
-            <Link browser={browser} selectedPage={selectedPage} editMode={editMode} thisColumn={thisColumn} linkUrl={obj.linkUrl} linkTitle={obj.linkTitle} key={index} />
+            <Link
+              browser={browser}
+              selectedPage={selectedPage}
+              editMode={editMode}
+              thisColumn={thisColumn}
+              linkUrl={obj.linkUrl}
+              linkTitle={obj.linkTitle}
+              key={index}
+            />
           )}</div>
           {editMode && (
             <form onSubmit={this.handleSubmit}>
-            {/* <p> Link is: {this.state.linkTitle} @ {this.state.linkUrl}</p> */}
-              <input type="text" name="linkUrl" placeholder="www.mywebsite.com" value={this.state.linkUrl} onChange={this.handleChange} />
-              <input type="text" name="linkTitle" placeholder="My Web Site Title" value={this.state.linkTitle} onChange={this.handleChange} />
-              <input type="submit" value="submit" />
+              <hr />
+              <input
+                type="text"
+                name="linkUrl"
+                placeholder="www.mywebsite.com"
+                value={this.state.linkUrl}
+                onChange={this.handleChange}
+              />
+              <input
+                type="text"
+                name="linkTitle"
+                placeholder="My Web Site Title"
+                value={this.state.linkTitle}
+                onChange={this.handleChange}
+              />
+              <input type="submit" value="add link" />
             </form>
           )}
         </div>
