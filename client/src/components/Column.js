@@ -14,7 +14,7 @@ const Column = props => {
 
   return (
     <div className="column">{ panels.map((obj, index) =>
-      <Panel browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} thisColumn={id} />
+      <Panel browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} thisColumn={id} update={update} />
     ) }
     {editMode && <div className="plusDiv"><span className="plus" onClick={ function() { handleClick() } }>+ LinkPanel</span></div>}
     </div>
