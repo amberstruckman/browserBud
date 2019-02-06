@@ -248,7 +248,7 @@ class App extends React.Component {
 					<Bubbles browser={this.state.browser}/>
 					<DayCalendar />
 					<Chat/>
-					{/* <Forecast /> */}
+					<Forecast />
           
         </div>
       );
