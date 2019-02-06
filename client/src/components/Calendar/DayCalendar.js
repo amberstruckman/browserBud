@@ -179,6 +179,7 @@ class DayCalendar extends Component {
         : "";
       //alert(JSON.strignify(dayViewObj));
       return (
+        <div className="daycalendarbubble">
           <div>
               <p>
                 <button title="Go back a month" key={prevMonthKey} onClick={this.changeDay} value={prevMonthKey}>&lt;&lt;</button>
@@ -190,6 +191,7 @@ class DayCalendar extends Component {
               <DayPlanner openNewEvent={this.openEventForm} {...selectedDay} />
               {eventForm}
           </div>     
+          </div>
       );
     }
   }

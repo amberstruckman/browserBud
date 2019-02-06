@@ -229,6 +229,7 @@ class Forecast extends Component {
 		const currentTemp = data && data.list && data.list.length ? Math.round( data.list[0].main.temp) + "\u00B0" : "";
 
 		return (
+			<div className="forecastbubble">
 			<div className="weather-widget">
 				<form onSubmit={this.submitLocation}>
 					<input type="text" 
@@ -244,6 +245,7 @@ class Forecast extends Component {
 					<h3>{forecastLocation}&nbsp;{currentTemp}</h3>
 				{forecast}
 				</div>
+			</div>
 			</div>
 		);
 	}
