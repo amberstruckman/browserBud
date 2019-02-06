@@ -23,8 +23,9 @@ const Panel = props => {
       </div>
     );
   } else if (panelType === "widget") {
-    // widgets go here
+    
   }
+  return null;
 }
 
 export default Panel;

@@ -5,23 +5,23 @@ import moment from "moment";
 class Weather extends Component {
 
 	render() {
-		var forecastMoment = moment(this.props.dt_txt);
-		var forecastDay = forecastMoment.format("M/D");
+		const forecastMoment = moment(this.props.dt_txt);
+		const isToday = forecastMoment.isBefore(moment().endOf("day"));
+		var forecastDay = isToday ? "Today" : forecastMoment.format("dddd");
 
 		return (
 			 <div className="weather-card"> 
-				<p className="notes">{this.props.location}</p>
-				
+					{/* <p className="notes">{isToday ? Math.round( this.props.main.temp) + '\u00B0' : '\u00A0' }</p>				 */}
 				<div className="view">
-					<img  src={"https://openweathermap.org/img/w/" + this.props.weather[0].icon + ".png"} alt={this.props.weather[0].description} />
+					<img  src={"https://openweathermap.org/img/w/" + this.props.aggWeather.icon + ".png"} alt={this.props.aggWeather.description} />
 					<p className="time">{forecastDay}</p>
 				</div>
 
 				<hr style={{ backgroundColor: '#dfe6e9', marginVertical:20}} />
 				
 				<div className="view">
-					<p className="notes">{this.props.weather[0].description}</p>
-					<p className="notes">{Math.round( this.props.main.temp)}&#8451;</p>
+					<p className="notes">{Math.round(this.props.main.temp_max)}&deg;&nbsp;/&nbsp;{Math.round(this.props.main.temp_min)}&deg;</p>
+					<p className="notes">{this.props.aggWeather.description}</p>
 				</div>
 			</div>
 		);
