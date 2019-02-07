@@ -97,7 +97,7 @@ class Panel extends React.Component {
                   placeholder={panelTitle}
                   onChange={this.handleTitleChange}
                 />
-                <input type="submit" value="Update Title" />
+                <input type="submit" className="linkButton" value="Update Title" />
                 <hr />
               </form>
             }
@@ -123,6 +123,7 @@ class Panel extends React.Component {
               <hr />
               <input
                 type="text"
+                className="inputField"
                 name="linkUrl"
                 placeholder="www.mywebsite.com"
                 value={this.state.linkUrl}
@@ -130,12 +131,13 @@ class Panel extends React.Component {
               />
               <input
                 type="text"
+                className="inputField"
                 name="linkTitle"
                 placeholder="My Web Site Title"
                 value={this.state.linkTitle}
                 onChange={this.handleChange}
               />
-              <input type="submit" value="add link" />
+              <input type="submit" className="linkButton" value="add link" />
             </form>
           )}
         </div>

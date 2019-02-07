@@ -94,110 +94,202 @@ class App extends React.Component {
 
   handleSaveClick() {
     const browser = {
-      pages: [
-        {
-          pageTitle: "Here's page one of my super awesome links.",
-          columns: [
-            {
-              panels: [
-                {
-                  panelType: "linkPanel",
-                  panelTitle: "web tools",
-                  links: [
-                    {
-                      linkTitle: "Google",
-                      linkUrl: "https://www.google.com"
-                    },
-                    {
-                      linkTitle: "Wikipedia",
-                      linkUrl: "https://www.wikipedia.com"
-                    }
-                  ]
-                },
-                {
-                  panelType: "linkPanel",
-                  panelTitle: "social media",
-                  links: [
-                    {
-                      linkTitle: "Facebook",
-                      linkUrl: "https://www.facebook.com"
-                    },
-                    {
-                      linkTitle: "Instagram",
-                      linkUrl: "https://www.instagram.com"
-                    },
-                    {
-                      linkTitle: "LinkedIn",
-                      linkUrl: "https://www.linkedin.com"
-                    },
-                    {
-                      linkTitle: "Reddit",
-                      linkUrl: "https://www.reddit.com"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              panels: [
-                {
-                  panelType: "linkPanel",
-                  panelTitle: "news sources",
-                  links: [
-                    {
-                      linkTitle: "The New York Times",
-                      linkUrl: "https://www.nytimes.com"
-                    },
-                    {
-                      linkTitle: "Washington Post",
-                      linkUrl: "https://www.washingtonpost.com"
-                    },
-                    {
-                      linkTitle: "National Public Radio",
-                      linkUrl: "https://www.npr.org"
-                    },
-                    {
-                      linkTitle: "CNN",
-                      linkUrl: "https://www.cnn.com"
-                    },
-                    {
-                      linkTitle: "Seattle Times",
-                      linkUrl: "https://www.seattletimes.com"
-                    },
-                    {
-                      linkTitle: "Politico",
-                      linkUrl: "https://www.politico.com"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              panels: [
-                {
-                  panelType: "linkPanel",
-                  panelTitle: "fun stuff",
-                  links: [
-                    {
-                      linkTitle: "Internet Movie Database",
-                      linkUrl: "https://www.imdb.com"
-                    },
-                    {
-                      linkTitle: "All Music Guide",
-                      linkUrl: "https://www.allmusic.com"
-                    },
-                    {
-                      linkTitle: "Airbnb",
-                      linkUrl: "https://www.airbnb.com"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+      "pages": [
+      {
+      "pageTitle": "Here's page one of my super awesome links.",
+      "columns": [
+      {
+      "panels": [
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "search",
+      "links": [
+      {
+      "linkTitle": "Google",
+      "linkUrl": "https://www.google.com"
+      },
+      {
+      "linkTitle": "Bing",
+      "linkUrl": "http://www.bing.com"
+      },
+      {
+      "linkTitle": "Wikipedia",
+      "linkUrl": "http://www.wikipedia.org"
+      }
       ]
-    };
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "social media",
+      "links": [
+      {
+      "linkTitle": "Facebook",
+      "linkUrl": "https://www.facebook.com"
+      },
+      {
+      "linkTitle": "Instagram",
+      "linkUrl": "https://www.instagram.com"
+      },
+      {
+      "linkTitle": "LinkedIn",
+      "linkUrl": "https://www.linkedin.com"
+      },
+      {
+      "linkTitle": "Reddit",
+      "linkUrl": "https://www.reddit.com"
+      }
+      ]
+      }
+      ]
+      },
+      {
+      "panels": [
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "news sources",
+      "links": [
+      {
+      "linkTitle": "The New York Times",
+      "linkUrl": "https://www.nytimes.com"
+      },
+      {
+      "linkTitle": "Washington Post",
+      "linkUrl": "https://www.washingtonpost.com"
+      },
+      {
+      "linkTitle": "National Public Radio",
+      "linkUrl": "https://www.npr.org"
+      },
+      {
+      "linkTitle": "CNN",
+      "linkUrl": "https://www.cnn.com"
+      },
+      {
+      "linkTitle": "Seattle Times",
+      "linkUrl": "https://www.seattletimes.com"
+      },
+      {
+      "linkTitle": "Politico",
+      "linkUrl": "https://www.politico.com"
+      }
+      ]
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "travel",
+      "links": [
+      {
+      "linkTitle": "Expedia",
+      "linkUrl": "http://www.expedia.com"
+      },
+      {
+      "linkTitle": "Airbnb",
+      "linkUrl": "http://www.airbnb.com"
+      }
+      ]
+      }
+      ]
+      },
+      {
+      "panels": [
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "fun stuff",
+      "links": [
+      {
+      "linkTitle": "Internet Movie Database",
+      "linkUrl": "https://www.imdb.com"
+      },
+      {
+      "linkTitle": "All Music Guide",
+      "linkUrl": "https://www.allmusic.com"
+      },
+      {
+      "linkTitle": "KEXP",
+      "linkUrl": "http://www.kexp.org"
+      }
+      ]
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "shopping",
+      "links": [
+      {
+      "linkTitle": "Amazon",
+      "linkUrl": "http://www.amazon.com"
+      }
+      ]
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "email",
+      "links": [
+      {
+      "linkTitle": "Gmail",
+      "linkUrl": "http://www.gmail.com"
+      },
+      {
+      "linkTitle": "Yahoo! Mail",
+      "linkUrl": "http://mail.yahoo.com"
+      },
+      {
+      "linkTitle": "Hotmail",
+      "linkUrl": "http://www.hotmail.com"
+      }
+      ]
+      }
+      ]
+      },
+      {
+      "panels": [
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "programming",
+      "links": [
+      {
+      "linkTitle": "GitHub",
+      "linkUrl": "http://github.com"
+      },
+      {
+      "linkTitle": "Stack Overflow",
+      "linkUrl": "http://stackoverflow.com"
+      }
+      ]
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "transit",
+      "links": [
+      {
+      "linkTitle": "Sound Transit",
+      "linkUrl": "http://www.soundtransit.org"
+      },
+      {
+      "linkTitle": "King County Metro",
+      "linkUrl": "http://metro.kingcounty.gov"
+      }
+      ]
+      },
+      {
+      "panelType": "linkPanel",
+      "panelTitle": "rideshare",
+      "links": [
+      {
+      "linkTitle": "Lyft",
+      "linkUrl": "http://www.lyft.com"
+      },
+      {
+      "linkTitle": "Uber",
+      "linkUrl": "http://www.uber.com"
+      }
+      ]
+      }
+      ]
+      }
+      ]
+      }
+      ]
+      }
     this.setState({ browser: browser });
     BrowserApi.putBrowser(browser);
   }
@@ -235,8 +327,8 @@ class App extends React.Component {
               selectedPage={this.state.selectedPage}
               editMode={this.state.editMode}
               update={this.update} />
-            <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
             <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
+            <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
             <br /> <hr />
             <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
@@ -249,7 +341,7 @@ class App extends React.Component {
             <Chat />
             </div>
             <div className="col-md-4">
-            {/* <Forecast /> */}
+            <Forecast />
             <Bubbles browser={this.state.browser} />
             </div>
             <div className="col-md-4">
