@@ -21,66 +21,66 @@ import EditMode from "./components/EditMode";
 // import PageSelect from "./components/PageSelect";
 
 class App extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			loggedIn: false,
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
       user: null,
       browser: null,
       selectedPage: 0,
       editMode: false
-		};
-		this._logout = this._logout.bind(this);
+    };
+    this._logout = this._logout.bind(this);
     this._login = this._login.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.update = this.update.bind(this);
     this.modeChange = this.modeChange.bind(this);
     // this.pageSelectChange = this.pageSelectChange.bind(this);
-	}
-	componentDidMount() {
-		axios.get("/auth/user").then(response => {
-			if (!!response.data.user) {
-				this.setState({
-					loggedIn: true,
+  }
+  componentDidMount() {
+    axios.get("/auth/user").then(response => {
+      if (!!response.data.user) {
+        this.setState({
+          loggedIn: true,
           user: response.data.user,
           browser: response.data.browser,
           selectedPage: 0,
           editMode: false
-				});
-			} else {
-				this.setState({
-					loggedIn: false,
+        });
+      } else {
+        this.setState({
+          loggedIn: false,
           user: null,
           browser: null,
           selectedPage: null,
           editMode: false
-				});
-			}
-		});
-	}
+        });
+      }
+    });
+  }
 
-	_logout(event) {
-		event.preventDefault();
-		axios.post("/auth/logout").then(response => {
-			if (response.status === 200) {
-				this.setState({
-					loggedIn: false,
+  _logout(event) {
+    event.preventDefault();
+    axios.post("/auth/logout").then(response => {
+      if (response.status === 200) {
+        this.setState({
+          loggedIn: false,
           user: null,
           browser: null,
           selectedPage: null,
           editMode: false
-				});
-			}
-		});
-	}
+        });
+      }
+    });
+  }
 
-	_login(email, password) {
-		axios.post("/auth/login", {
-				email,
-				password
-			})
-			.then(response => {
-				if (response.status === 200) {
+  _login(email, password) {
+    axios.post("/auth/login", {
+      email,
+      password
+    })
+      .then(response => {
+        if (response.status === 200) {
           this.setState({
             loggedIn: true,
             user: response.data.user,
@@ -88,8 +88,8 @@ class App extends React.Component {
             selectedPage: 0,
             editMode: false
           });
-				}
-			}).catch(error => console.log(error));
+        }
+      }).catch(error => console.log(error));
   };
 
   handleSaveClick() {
@@ -222,32 +222,44 @@ class App extends React.Component {
   //   this.update(this.browser);
   // }
 
-	render() {
+  render() {
     if (this.state.loggedIn) {
       return (
         <div className="App">
-          <Header user={this.state.user} _logout={this._logout} loggedIn={this.state.loggedIn} />
-          {/* <PageSelect browser={this.state.browser} value={this.state.selectedPage} onChange={this.pageSelectChange} />
+     
+            <Header user={this.state.user} _logout={this._logout} loggedIn={this.state.loggedIn} />
+            {/* <PageSelect browser={this.state.browser} value={this.state.selectedPage} onChange={this.pageSelectChange} />
           <PageAdd browser={this.state.browser} update={this.update} /> */}
-          <Page
-            browser={this.state.browser}
-            selectedPage={this.state.selectedPage}
-            editMode={this.state.editMode}
-            update={this.update} />
-          <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
-          <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
-          <br /> <hr />
-          <Route exact path="/login" render={() =>
+            <Page
+              browser={this.state.browser}
+              selectedPage={this.state.selectedPage}
+              editMode={this.state.editMode}
+              update={this.update} />
+            <SaveButton user={this.state.user} onClick={this.handleSaveClick} />
+            <EditMode editMode={this.state.editMode} onChange={this.modeChange} />
+            <br /> <hr />
+            <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
-          />
-          <Route exact path="/signup" component={SignupForm} />
-          <TodoList browser={this.state.browser}/>
-					<Bubbles browser={this.state.browser}/>
-					<DayCalendar />
-					<Chat/>
-					<Forecast />
-          
-          
+            />
+            <Route exact path="/signup" component={SignupForm} />
+         <div className="container">
+          <div className="row">
+            <div class="col-md-4">
+            <TodoList browser={this.state.browser} />
+            <Chat />
+            </div>
+            <div class="col-md-4">
+            <Forecast />
+            <Bubbles browser={this.state.browser} />
+            </div>
+            <div class="col-md-4">
+            <DayCalendar />
+            </div>
+            </div>
+                 
+          </div>
+
+
         </div>
       );
     } else {
@@ -256,7 +268,7 @@ class App extends React.Component {
           <h1>BrowserBud!</h1>
           <Header user={this.state.user} _logout={this._logout} loggedIn={this.state.loggedIn} />
           <Route exact path="/login" render={() =>
-              <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
+            <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
           />
           <Route exact path="/signup" component={SignupForm} />
           <br />

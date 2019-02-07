@@ -99,7 +99,7 @@ class TodoList extends Component {
           <form onSubmit={this.addItem}>
           <input ref={(a) => this._inputElement = a}>
             </input>
-            <button type="submit">add</button>
+            <button type="submit"> ADD </button>
             <button onClick={this.createNew}>DONE</button>
           </form>
         </div>
