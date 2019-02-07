@@ -6,10 +6,10 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 width: 300px;
-background-color: paleturquoise;
+background-color: RoyalBlue;
 margin: 8px;
 border: 1px solid lightgrey;
-border-radius: 2px;
+border-radius: 8px;
 
 display: flex;
 flex-direction: column;
@@ -21,8 +21,8 @@ padding:8px;
 
 const TaskList = styled.div`
 padding: 8px;
-transition: background-color 0.2s ease;
-background-color: ${props => (props.isDraggingOver ? 'white':'paleturquoise')};
+transition: background-color 0.4s ease;
+background-color: ${props => (props.isDraggingOver ? 'DarkSlateBlue':'#669EF9')};
 flex-grow: 1;
 min-height:100px;
 `

@@ -8,7 +8,7 @@ padding: 8px;
 border-radius: 3px;
 border: 1px solid white;
 margin-bottom: 8px;
-background-color: ${props => (props.isDragging? 'palegreen':'paleturquoise')}
+background-color: ${props => (props.isDragging? 'DarkSlateBlue':'RoyalBlue')}
 
 display: flex;
 `
@@ -16,7 +16,7 @@ display: flex;
 const Handle = styled.div`
 width: 20px;
 height: 20px;
-background-color: turquoise;
+background-color: DarkSlateBlue;
 border-radius: 4px;
 margin-right: 8px;
 `
