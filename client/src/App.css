@@ -95,6 +95,7 @@
   background-color: lightcoral;
   box-shadow: 1px 1px 1px lightcoral;
   color: white;
+  font-weight: normal;
   border: 1px solid red;
   border-radius: 4px;
   padding: 1px 6px;
@@ -107,6 +108,21 @@
 
 .column {
   width: 210px;
+}
+
+.colPad {
+  padding: 10px;
+}
+
+.inputField {
+  margin: 2px 0 0 0;
+}
+
+.linkButton {
+  background-color: lightblue;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 2px;
 }
 
 a {
