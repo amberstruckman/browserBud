@@ -37,8 +37,8 @@ export default class Task extends React.Component {
 
                 <Handle   {...provided.dragHandleProps}/>
                     
-                        {this.props.task.content}
-                        {this.props.task.link}
+                        <a href={this.props.task.link}>{this.props.task.content}</a>
+                        
                  
 
                 </Container>
