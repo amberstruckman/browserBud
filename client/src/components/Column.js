@@ -3,8 +3,8 @@ import Panel from "./Panel";
 
 const Column = props => {
 
-  const { browser, selectedPage, editMode, id, update } = props;
-  const { panels } = browser.pages[selectedPage].columns[id];
+  const { browser, selectedPage, editMode, selectedColumn, update } = props;
+  const { panels } = browser.pages[selectedPage].columns[selectedColumn];
 
   function handleClick() {
     const newLinkPanel = { panelType: "linkPanel", panelTitle: "new linkPanel", links: [] };
@@ -14,7 +14,7 @@ const Column = props => {
 
   return (
     <div className="column">{ panels.map((obj, index) =>
-      <Panel browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} id={index} thisColumn={id} update={update} />
+      <Panel browser={browser} selectedPage={selectedPage} editMode={editMode} key={index} selectedColumn={index} selectedColumn={selectedColumn} selectedPanel={index} update={update} />
     ) }
     {editMode && <div className="plusDiv"><span className="plus" onClick={ function() { handleClick() } }>+ LinkPanel</span></div>}
     </div>

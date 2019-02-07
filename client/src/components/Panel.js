@@ -24,8 +24,8 @@ class Panel extends React.Component {
       if (!/^https?:\/\//i.test(linkUrl)) {
         linkUrl = 'http://' + linkUrl;
       }
-      let { browser, selectedPage, thisColumn, id, update } = this.props;
-      let { links } = browser.pages[selectedPage].columns[thisColumn].panels[id];
+      let { browser, selectedPage, selectedColumn, selectedPanel, update } = this.props;
+      let { links } = browser.pages[selectedPage].columns[selectedColumn].panels[selectedPanel];
       const newLink = { linkTitle: linkTitle, linkUrl: linkUrl };
       links.push(newLink);
       update(browser);
@@ -34,8 +34,8 @@ class Panel extends React.Component {
   }
 
   render() {
-    const { browser, selectedPage, editMode, thisColumn, id } = this.props;
-    const { panelType, panelTitle, links } = browser.pages[selectedPage].columns[thisColumn].panels[id];
+    const { browser, selectedPage, editMode, selectedColumn, selectedPanel, update } = this.props;
+    const { panelType, panelTitle, links } = browser.pages[selectedPage].columns[selectedColumn].panels[selectedPanel];
 
     if (panelType === "linkPanel") {
       return (
@@ -46,10 +46,13 @@ class Panel extends React.Component {
               browser={browser}
               selectedPage={selectedPage}
               editMode={editMode}
-              thisColumn={thisColumn}
+              selectedColumn={selectedColumn}
               linkUrl={obj.linkUrl}
               linkTitle={obj.linkTitle}
+              selectedPanel={selectedPanel}
+              selectedLink={index}
               key={index}
+              update={update}
             />
           )}</div>
           {editMode && (
