@@ -5,7 +5,6 @@ import "./App.css";
 import LoginForm from "./components/Login/LoginForm";
 import SignupForm from "./components/SignupForm";
 import Header from "./components/Header";
-import DisplayLinks from "./components/DisplayLinks";
 import Page from "./components/Page";
 import SaveButton from "./components/SaveButton";
 // import TodoItems from "./components/TodoPanel/TodoItems";
@@ -228,7 +227,6 @@ class App extends React.Component {
       return (
         <div className="App">
           <Header user={this.state.user} _logout={this._logout} loggedIn={this.state.loggedIn} />
-          {/* <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
           {/* <PageSelect browser={this.state.browser} value={this.state.selectedPage} onChange={this.pageSelectChange} />
           <PageAdd browser={this.state.browser} update={this.update} /> */}
           <Page
@@ -257,8 +255,6 @@ class App extends React.Component {
         <div className="App">
           <h1>BrowserBud!</h1>
           <Header user={this.state.user} _logout={this._logout} loggedIn={this.state.loggedIn} />
-          {/* <Header user={this.state.user} /> */}
-          {/* <DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} /> */}
           <Route exact path="/login" render={() =>
               <LoginForm _login={this._login} _googleSignin={this._googleSignin} />}
           />

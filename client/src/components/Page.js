@@ -4,7 +4,7 @@ import Column from "./Column";
 const Page = props => {
 
   const { browser, selectedPage, editMode, update } = props;
-  const { pageTitle, columns } = browser.pages[selectedPage];
+  const { columns } = browser.pages[selectedPage];
 
   function handleClick() {
     const newColumn = { panels: [] };
