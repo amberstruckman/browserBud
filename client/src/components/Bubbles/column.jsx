@@ -5,7 +5,7 @@ import Task from './task'
 import styled from 'styled-components'
 
 const Container = styled.div`
-width: 300px;
+width: 160px;
 background-color: RoyalBlue;
 margin: 8px;
 border-radius: 8px;
@@ -15,17 +15,17 @@ flex-direction: column;
 box-shadow: 3px 3px 2px gray;
 `
 
-const Title = styled.h3`
-padding:8px;
+const Title = styled.h6`
+padding:6px;
 margin-top:8px;
 color: white;
 `
 
 const TaskList = styled.div`
-padding: 8px;
+padding: 5px;
 border-bottom-left-radius: 8px;
 border-bottom-right-radius: 8px;
-transition: background-color 0.3s ease;
+transition: background-color 0.2s ease;
 background-color: ${props => (props.isDraggingOver ? '#669EF9':'white')};
 flex-grow: 1;
 min-height:100px;

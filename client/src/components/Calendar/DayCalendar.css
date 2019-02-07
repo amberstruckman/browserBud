@@ -53,3 +53,17 @@ th{
 td button{
   margin-right: 0.4em;
 }
+
+form p input{
+  margin-top: 20px;
+  margin-left: 2.1em !important;
+}
+
+form p button {
+  margin-top:20px;
+  margin-left: 6.1em;
+}
+
+div.daycalendarbubble{
+  margin-left:auto;
+}

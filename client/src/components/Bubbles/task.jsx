@@ -5,7 +5,7 @@ import "./Bubbles.css"
 
 const Container = styled.div`
 width: auto;
-padding: 8px;
+padding: 2px;
 box-shadow: 1px 1px 1px gray;
 border-radius: 3px;
 border: 2px solid RoyalBlue;
