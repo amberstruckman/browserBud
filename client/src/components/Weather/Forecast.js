@@ -37,6 +37,7 @@ class Forecast extends Component {
 		this.createAggregateWeather = this.createAggregateWeather.bind(this);
 		this.saveLocation = this.saveLocation.bind(this);
 		this.acquireSavedLocation = this.acquireSavedLocation.bind(this);
+		this.getWeatherTitle = this.getWeatherTitle.bind(this);
 	}
 
 	componentDidMount() {
@@ -154,13 +155,19 @@ class Forecast extends Component {
 				//push weather
 				currentDay.weather.push(...period.weather);
 				currentDay.aggWeather = this.selectWeatherForDay(currentDay.aggWeather || this.createAggregateWeather(currentDay.weather[0]), period.weather[0]);
-			} else if (days.length < 3) {
-				days.push(period);
 
+				days[lastIndex] = currentDay;
+			} else if (days.length < 3) {
+				if (!period.hasOwnProperty("aggWeather")) {
+					period.aggWeather = this.createAggregateWeather(period.weather[0]);
+				}
+				days.push(period);
 			}
-			days[lastIndex] = currentDay;
 		}
 		else {
+			if (!period.hasOwnProperty("aggWeather")) {
+				period.aggWeather = this.createAggregateWeather(period.weather[0]);
+			}
 			days.push(period);
 		}
 		// if (index % 8 === 0 && index / 8 < 3) {
@@ -219,14 +226,22 @@ class Forecast extends Component {
 		return agg;
 	}
 
+	getWeatherTitle(data) {
+		if (!data || !data.list || data.list.length < 1) {
+			this.getLocale();
+			return null;
+		}
+		const forecastLocation = data.city ? data.city.name : this.getLocale();
+		const currentTemp = Math.round(data.list[0].main.temp) + "\u00B0";
+		return (<h3>{forecastLocation}&nbsp;{currentTemp}</h3>);
+	}
+
 	render() {
 		const data = this.state.forecast;
 		const forecast = data.list.reduce(this.groupWeatherByDay, [])
 			.map((weather, index) => {
 				return (<Weather key={`weather${index}`} {...weather} />)
 		});
-		const forecastLocation = data && data.city ? data.city.name : this.getLocale();
-		const currentTemp = data && data.list && data.list.length ? Math.round( data.list[0].main.temp) + "\u00B0" : "";
 
 		return (
 			<div className="forecastbubble">
@@ -242,8 +257,8 @@ class Forecast extends Component {
 					<button type="submit" key="submit" title="Update your weather report!">Update</button>
 				</form>
 				<div className="weather-forecast">
-					<h3>{forecastLocation}&nbsp;{currentTemp}</h3>
-				{forecast}
+					{this.getWeatherTitle(data)}
+					{forecast}
 				</div>
 			</div>
 			</div>
