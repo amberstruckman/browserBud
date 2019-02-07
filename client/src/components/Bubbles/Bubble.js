@@ -129,9 +129,9 @@ class Bubbles extends Component {
 
     render() {
 
-        console.log(this.props.browser)
-        console.log("columnorder", this.state.columnOrder)
-        console.log("pages", this.props.browser.pages[0].columns[0])
+        // console.log(this.props.browser)
+        // console.log("columnorder", this.state.columnOrder)
+        // console.log("pages", this.props.browser.pages[0].columns[0])
         
         return (
             <DragDropContext 
@@ -152,7 +152,7 @@ class Bubbles extends Component {
                 >
                 {this.state.columnOrder.map((columnId, index) => {
                     const column = this.state.columns[columnId];
-                    console.log("columnid", column)
+                    // console.log("columnid", column)
                     const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
                     return <Column key={column.id} column={column} tasks={tasks} index={index}/>

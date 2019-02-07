@@ -2,3 +2,39 @@
     width: 500px;
     height: auto;
 }
+
+.form-control{
+	padding: 6px !important;
+    font-size: 16px !important;
+    border: 2px solid rgb(77, 77, 233) !important;
+    width: 290px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.card-footer input {
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+
+.card-footer {
+    background-color: white;
+    box-shadow: 3px 3px 2px gray;
+    border-bottom-left-radius: 0.5em !important;
+    border-bottom-right-radius: 0.5em !important;
+    width: 330px;
+}
+
+.btn-primary {
+    width: 80% !important;
+}
+
+.chatCard-body{
+    background: white;
+    width: 330px;
+    padding: 10px;
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
+    box-shadow: 3px 3px 2px gray;
+    
+}

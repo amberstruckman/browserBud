@@ -1,7 +1,7 @@
 #bubbles{
-    width: 300px;
+    width: 250px;
     height: auto;
-    background: paleturquoise;
+    background: rgb(77, 77, 233);
     border-radius: 5px;
 
 }
@@ -10,7 +10,20 @@
     width: auto;
     padding: 8px;
     border-radius: 3px;
-    background: paleturquoise;
-    border: 1px solid white;
+    background:rgb(77, 77, 233);
     margin-bottom: 8px;
+}
+
+a{
+    color: black;
+    font-size: 1em;
+}
+
+div.sc-bdVaJa a{
+    font-size: 0.7em;
+}
+
+div.sc-EHOje {
+    margin-left:auto;
+    margin-right:auto;
 }

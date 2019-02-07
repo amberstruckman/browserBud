@@ -11,7 +11,8 @@
 	display: flex;
     margin: 1em auto;
     flex-wrap: wrap;
-    justify-content: space-around;
+	justify-content: space-around;
+	margin-left:auto;
 }
 .weather-forecast h3{
 	flex-basis: 100%;
@@ -43,7 +44,7 @@
 }
 
 .forecastbubble{
-background-color: paleturquoise;
+background-color: rgb(77, 77, 233);
 box-shadow: 3px 3px 2px gray;
 margin: 5px;
 padding: 5px;
@@ -51,4 +52,9 @@ border-radius: 4px;
 /* border: 1px solid darkblue; */
 text-align: left;
 width: 300px;
+}
+
+div.weather-widget form{
+	margin-left:39px !important;
+
 }
