@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "./Link";
-import PanelTitle from "./PanelTitle";
 
 class Panel extends React.Component {
 
@@ -17,8 +16,9 @@ class Panel extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handlePanelTitleChange = this.handlePanelTitleChange.bind(this);
-    this.handleEditTitleClick = this.handleEditTitleClick.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleTitleSubmit = this.handleTitleSubmit.bind(this);
     this.setState({ panelTitleInput: panelTitle });
   }
 
@@ -53,11 +53,24 @@ class Panel extends React.Component {
     update(browser);
   }
 
-  handlePanelTitleChange(event) {
-    this.setState({ editTitleMode: false });
+  handleTitleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleEditTitleClick(event) {
+  handleTitleSubmit(event) {
+    event.preventDefault();
+    let panelTitleInput = this.state.panelTitleInput;
+    if (!panelTitleInput) {
+      alert("Please enter a panel title.");
+    } else {
+      let { browser, selectedPage, selectedColumn, selectedPanel, update } = this.props;
+      browser.pages[selectedPage].columns[selectedColumn].panels[selectedPanel].panelTitle = panelTitleInput;
+      this.setState({ editTitleMode: false, panelTitleInput: "" });
+      update(browser);
+    }
+  }
+
+  handleTitleClick(event) {
     this.setState({ editTitleMode: true });
   }
 
@@ -73,9 +86,21 @@ class Panel extends React.Component {
 
             {(!editTitleMode || !editMode) && panelTitle}
 
-            {editMode && !editTitleMode && <div className="minusDiv"><span className="minus" onClick={() => this.handleEditTitleClick()}>- Edit Title</span></div>}
+            {editMode && !editTitleMode && <div className="minusDiv"><span className="minus" onClick={() => this.handleTitleClick()}>- Edit Title</span></div>}
 
-            {editMode && editTitleMode && <PanelTitle browser={browser} selectedPage={selectedPage} selectedColumn={selectedColumn} selectedPanel={selectedPanel} update={update} onChange={this.handlePanelTitleChange} /> }
+            {editMode && editTitleMode && 
+              <form onSubmit={this.handleTitleSubmit}>
+                <input
+                  type="text"
+                  name="panelTitleInput"
+                  value={this.state.panelTitle}
+                  placeholder={panelTitle}
+                  onChange={this.handleTitleChange}
+                />
+                <input type="submit" value="Update Title" />
+                <hr />
+              </form>
+            }
 
           </div>
           <div>{ links.map((obj, index) =>

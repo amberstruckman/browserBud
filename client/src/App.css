@@ -108,3 +108,7 @@
 .column {
   width: 210px;
 }
+
+a {
+  color: blue !important;
+}

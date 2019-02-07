@@ -244,15 +244,15 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignupForm} />
          <div className="container">
           <div className="row">
-            <div class="col-md-4">
+            <div className="col-md-4">
             <TodoList browser={this.state.browser} />
             <Chat />
             </div>
-            <div class="col-md-4">
-            <Forecast />
+            <div className="col-md-4">
+            {/* <Forecast /> */}
             <Bubbles browser={this.state.browser} />
             </div>
-            <div class="col-md-4">
+            <div className="col-md-4">
             <DayCalendar />
             </div>
             </div>
