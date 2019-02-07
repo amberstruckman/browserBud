@@ -1,14 +1,25 @@
 import React from "react";
 import Link from "./Link";
+import PanelTitle from "./PanelTitle";
 
 class Panel extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { linkUrl: "", linkTitle: "" };
+    const { browser, selectedPage, selectedColumn, selectedPanel } = props;
+    const { panelTitle } = browser.pages[selectedPage].columns[selectedColumn].panels[selectedPanel];
+    this.state = {
+      linkUrl: "", 
+      linkTitle: "", 
+      panelTitleInput: "",
+      editTitleMode: false
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handlePanelTitleChange = this.handlePanelTitleChange.bind(this);
+    this.handleEditTitleClick = this.handleEditTitleClick.bind(this);
+    this.setState({ panelTitleInput: panelTitle });
   }
 
   handleChange(event) {
@@ -42,14 +53,31 @@ class Panel extends React.Component {
     update(browser);
   }
 
+  handlePanelTitleChange(event) {
+    this.setState({ editTitleMode: false });
+  }
+
+  handleEditTitleClick(event) {
+    this.setState({ editTitleMode: true });
+  }
+
   render() {
     const { browser, selectedPage, editMode, selectedColumn, selectedPanel, update } = this.props;
     const { panelType, panelTitle, links } = browser.pages[selectedPage].columns[selectedColumn].panels[selectedPanel];
+    const { editTitleMode } = this.state;
 
     if (panelType === "linkPanel") {
       return (
         <div className="panel">
-          <div className="panelTitle">{panelTitle}</div>
+          <div className="panelTitle">
+
+            {(!editTitleMode || !editMode) && panelTitle}
+
+            {editMode && !editTitleMode && <div className="minusDiv"><span className="minus" onClick={() => this.handleEditTitleClick()}>- Edit Title</span></div>}
+
+            {editMode && editTitleMode && <PanelTitle browser={browser} selectedPage={selectedPage} selectedColumn={selectedColumn} selectedPanel={selectedPanel} update={update} onChange={this.handlePanelTitleChange} /> }
+
+          </div>
           <div>{ links.map((obj, index) =>
             <Link
               browser={browser}
