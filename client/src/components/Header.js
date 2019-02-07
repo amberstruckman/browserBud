@@ -1,28 +1,27 @@
-import React from 'react'
-// TODO - add proptypes
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = props => {
-	let Greeting
-	if (props.user === null) {
-		Greeting = <p>Hello guest</p>
-	} else if (props.user.email) {
-		Greeting = (
-			<p>
-				Welcome back, <strong>{props.user.email}</strong>
-			</p>
-		)
-	} else if (props.user.local.email) {
-		Greeting = (
-			<p>
-				Welcome back, <strong>{props.user.local.email} </strong>
-			</p>
-		)
-	}
-	return (
-		<div className="Header">
-			{Greeting}
-		</div>
-	)
+
+  const { user, _logout, loggedIn } = props;
+
+  if (!loggedIn) {
+    return (
+      <div id="header" className="Header">
+      <img id="logo" src="../images/tinybrowserbud.png" alt="BrowserBud" />
+      <h1 className="appHeader">BrowserBud!</h1>
+			<p className="greeting">Please <Link to="/signup">sign up</Link> or <Link to="/login">login</Link></p>
+		  </div>
+    )
+  } else {
+    return (
+      <div id="header" className="Header">
+      <img id="logo" src="../images/tinybrowserbud.png" alt="BrowserBud" />
+      <h1 className="appHeader">BrowserBud!</h1>
+			<p className="greeting"><Link to="#" className="nav-link" onClick={props._logout}>Logout {props.user.local.email}</Link></p>
+		  </div>
+    )
+  }
 }
 
 export default Header

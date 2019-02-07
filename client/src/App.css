@@ -8,6 +8,40 @@
   height: 80px;
 }
 
+.page {
+  margin-top: 50px;
+}
+
+#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 51px;
+  background-color: white;
+}
+
+.appHeader {
+  position: absolute;
+  top: 0;
+  left: 55px;
+  color: #669EF9;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.greeting {
+  justify-content: right;
+  text-align: right;
+  margin: 14px 20px;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;
