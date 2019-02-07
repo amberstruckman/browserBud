@@ -8,21 +8,25 @@ const Container = styled.div`
 width: 300px;
 background-color: RoyalBlue;
 margin: 8px;
-border: 1px solid lightgrey;
 border-radius: 8px;
 
 display: flex;
 flex-direction: column;
+box-shadow: 3px 3px 2px gray;
 `
 
 const Title = styled.h3`
 padding:8px;
+margin-top:8px;
+color: white;
 `
 
 const TaskList = styled.div`
 padding: 8px;
-transition: background-color 0.4s ease;
-background-color: ${props => (props.isDraggingOver ? 'DarkSlateBlue':'#669EF9')};
+border-bottom-left-radius: 8px;
+border-bottom-right-radius: 8px;
+transition: background-color 0.3s ease;
+background-color: ${props => (props.isDraggingOver ? '#669EF9':'white')};
 flex-grow: 1;
 min-height:100px;
 `

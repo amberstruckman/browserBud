@@ -1,7 +1,7 @@
 #bubbles{
     width: 300px;
     height: auto;
-    background: paleturquoise;
+    background: rgb(77, 77, 233);
     border-radius: 5px;
 
 }
@@ -11,6 +11,9 @@
     padding: 8px;
     border-radius: 3px;
     background:rgb(77, 77, 233);
-    border: 1px solid white;
     margin-bottom: 8px;
+}
+
+a{
+    color: black;
 }

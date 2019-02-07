@@ -2,3 +2,33 @@
     width: 500px;
     height: auto;
 }
+
+.form-control{
+	padding: 6px !important;
+    font-size: 16px !important;
+    border: 2px solid rgb(77, 77, 233) !important;
+}
+
+.card-footer {
+    background-color: white;
+    box-shadow: 3px 3px 2px gray;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 0.5em !important;
+    width: 400px;
+}
+
+.btn-primary {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chatCard-body{
+    background: white;
+    width: 400px;
+    padding: 10px;
+    margin:10px;
+    border-radius: 0.5em;
+    box-shadow: 3px 3px 2px gray;
+    
+}

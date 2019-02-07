@@ -27,12 +27,29 @@ table.day-calendar {
 }
 
 .daycalendarbubble {
-  background-color: paleturquoise;
+  background-color: white;
   box-shadow: 3px 3px 2px gray;
   margin: 10px;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 0.5em;
   /* border: 1px solid darkblue; */
   text-align: left;
   width: 300px;
+
+}
+
+p{
+  margin-left: 15px;
+  margin-right: auto;
+}
+button{
+  background-color:rgb(77, 77, 233) !important;
+  border-radius:0.3em
+}
+
+th{
+  text-align: center;
+}
+td button{
+  margin-right: 0.4em;
 }

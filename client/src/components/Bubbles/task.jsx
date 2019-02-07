@@ -1,14 +1,16 @@
 import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
+import "./Bubbles.css"
 
 const Container = styled.div`
 width: auto;
 padding: 8px;
+box-shadow: 1px 1px 1px gray;
 border-radius: 3px;
-border: 1px solid white;
+border: 2px solid RoyalBlue;
 margin-bottom: 8px;
-background-color: ${props => (props.isDragging? 'DarkSlateBlue':'RoyalBlue')}
+background-color: ${props => (props.isDragging? 'RoyalBlue':'white')}
 
 display: flex;
 `
@@ -16,7 +18,7 @@ display: flex;
 const Handle = styled.div`
 width: 20px;
 height: 20px;
-background-color: DarkSlateBlue;
+background-color: RoyalBlue;
 border-radius: 4px;
 margin-right: 8px;
 `
