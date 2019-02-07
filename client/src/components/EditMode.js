@@ -7,7 +7,7 @@ const EditMode = props => {
   return (
     <div className="EditMode">
       <input id="editModeCheckbox" type="checkbox" checked={editMode} onChange={onChange} />
-      <label for="editModeCheckbox">Edit mode</label>
+      <label htmlFor="editModeCheckbox">Edit mode</label>
     </div>
   );
 }

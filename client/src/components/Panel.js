@@ -8,6 +8,7 @@ class Panel extends React.Component {
     this.state = { linkUrl: "", linkTitle: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -31,6 +32,14 @@ class Panel extends React.Component {
       update(browser);
       this.setState({ linkUrl: "", linkTitle: "" });
     }
+  }
+
+  handleClick() {
+    const { browser, selectedPage, selectedColumn, selectedPanel, update } = this.props;
+    let { panels } = browser.pages[selectedPage].columns[selectedColumn];
+    panels = panels.filter(panel => panel !== panels[selectedPanel]);
+    browser.pages[selectedPage].columns[selectedColumn].panels = panels;
+    update(browser);
   }
 
   render() {
@@ -57,6 +66,7 @@ class Panel extends React.Component {
           )}</div>
           {editMode && (
             <form onSubmit={this.handleSubmit}>
+              {links.length ? null : <div className="minusDiv"><span className="minus" onClick={() => this.handleClick()}>- Remove LinkPanel</span></div>}
               <hr />
               <input
                 type="text"

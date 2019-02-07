@@ -18,7 +18,7 @@ const Header = props => {
       <div id="header" className="Header">
       <img id="logo" src="../images/tinybrowserbud.png" alt="BrowserBud" />
       <h1 className="appHeader">BrowserBud!</h1>
-			<p className="greeting"><Link to="#" className="nav-link" onClick={props._logout}>Logout {props.user.local.email}</Link></p>
+			<p className="greeting"><Link to="#" className="nav-link" onClick={_logout}>Logout {user.local.email}</Link></p>
 		  </div>
     )
   }
