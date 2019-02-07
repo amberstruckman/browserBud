@@ -57,6 +57,19 @@
   align-items: left;
 }
 
+.minus {
+  background-color: lightcoral;
+  box-shadow: 1px 1px 1px lightcoral;
+  color: white;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.minusDiv {
+  align-items: left;
+}
+
 .column {
   width: 210px;
 }
