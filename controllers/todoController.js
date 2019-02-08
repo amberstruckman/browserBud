@@ -4,7 +4,7 @@ const convertForAlexa = (todo) => {
   console.log(JSON.stringify(todo));
   return {
     "uid": todo["_id"],
-    "updateDate": "2019-01-31T00:00:00.0Z",
+    "updateDate": "2019-02-07T00:00:00.0Z",
     "titleText": todo.item,
     "mainText": todo.item,
     "redirectionUrl": "https://thawing-plains-98515.herokuapp.com/"
